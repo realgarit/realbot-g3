@@ -477,7 +477,13 @@ def sell_in_shop(items_to_sell: list[tuple[Item, int]]):
 
             yield from scroll_to_item_in_bag(item)
             context.emulator.press_button("A")
-            yield from wait_until_task_is_active(select_quantity_task)
+            if not context.rom.is_rs and slot_quantity == 1:
+                # In FR/LG and Emerald, if there is only one item in a slot, the mart menu
+                # will not use the regular quantity selection but instead just ask a yes/no
+                # question.
+                yield from wait_until_task_is_active("Task_CallYesOrNoCallback")
+            else:
+                yield from wait_until_task_is_active(select_quantity_task)
             reverse_scroll = to_sell > slot_quantity / 2
             if reverse_scroll:
                 context.emulator.press_button("Down")
