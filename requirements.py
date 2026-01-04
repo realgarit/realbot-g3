@@ -24,7 +24,6 @@ required_modules = [
     "Pillow~=10.4.0",
     "sounddevice~=0.4.6",
     "pyperclip3~=0.4.1",
-    "plyer~=2.1.0",
     "notify-py~=0.3.42",
     "apispec~=6.3.0",
     "darkdetect~=0.8.0",

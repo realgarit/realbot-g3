@@ -1,8 +1,7 @@
 import re
-from tkinter import StringVar, Tk, ttk
+from tkinter import StringVar, Tk, ttk, filedialog
 from typing import Union
 
-import plyer
 from PIL import Image, ImageOps, ImageTk
 
 from modules.profiles import create_profile, list_available_profiles, profile_directory_exists
@@ -162,39 +161,29 @@ class CreateProfileScreen:
             self.run_profile(profile)
 
         def handle_load_save_press():
-            def handle_selected_file(selection: list[str]) -> None:
-                if selection is None or not selection:
-                    return
-                selected_rom = get_selected_rom()
-                if selected_rom is None:
-                    return
-                try:
-                    with open(selection[0], "rb") as file:
-                        profile = migrate_save_state(file, sv_name.get(), selected_rom)
-                    self.run_profile(profile)
-                except MigrationError as error:
-                    message_label.config(text=str(error), foreground="red")
-                    message_label.grid(row=3, column=0, columnspan=2)
+            selected_rom = get_selected_rom()
+            if selected_rom is None:
+                return
 
-            plyer.filechooser.open_file(
-                filters=[
-                    [
-                        "Save Games",
-                        "*.ss0",
-                        "*.ss1",
-                        "*.ss2",
-                        "*.ss3",
-                        "*.ss4",
-                        "*.ss5",
-                        "*.ss6",
-                        "*.ss7",
-                        "*.ss8",
-                        "*.ss9",
-                        "*.sav",
-                    ]
-                ],
-                on_selection=handle_selected_file,
+            # Use tkinter's native file dialog
+            file_path = filedialog.askopenfilename(
+                title="Select Save File",
+                filetypes=[
+                    ("Save Games", "*.ss0 *.ss1 *.ss2 *.ss3 *.ss4 *.ss5 *.ss6 *.ss7 *.ss8 *.ss9 *.sav"),
+                    ("All Files", "*.*")
+                ]
             )
+
+            if not file_path:
+                return
+
+            try:
+                with open(file_path, "rb") as file:
+                    profile = migrate_save_state(file, sv_name.get(), selected_rom)
+                self.run_profile(profile)
+            except MigrationError as error:
+                message_label.config(text=str(error), foreground="red")
+                message_label.grid(row=3, column=0, columnspan=2)
 
         button_container = ttk.Frame(container, padding=(0, 15, 0, 5))
         button_container.grid(row=2, column=0, columnspan=2)

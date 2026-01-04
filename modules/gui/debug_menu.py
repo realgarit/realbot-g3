@@ -2,10 +2,9 @@ import tkinter
 import webbrowser
 import zlib
 from datetime import datetime
-from tkinter import Tk, Menu
+from tkinter import Tk, Menu, filedialog
 
 import PIL.PngImagePlugin
-import plyer
 
 from modules.battle_state import battle_is_active
 from modules.clock import get_clock_time
@@ -41,14 +40,15 @@ from modules.runtime import get_sprites_path, get_base_path
 
 
 def _create_save_state() -> None:
-    target_path = plyer.filechooser.save_file(
-        path=str(get_base_path() / "tests" / "states"),
-        filters=[".ss1"],
+    target_path = filedialog.asksaveasfilename(
+        initialdir=str(get_base_path() / "tests" / "states"),
+        defaultextension=".ss1",
+        filetypes=[("Save State", "*.ss1"), ("All Files", "*.*")]
     )
-    if target_path is None or len(target_path) != 1:
+    if not target_path:
         return
 
-    with open(target_path[0], "wb") as file:
+    with open(target_path, "wb") as file:
         screenshot = context.emulator.get_screenshot()
         extra_chunks = PIL.PngImagePlugin.PngInfo()
         extra_chunks.add(b"gbAs", zlib.compress(context.emulator.get_save_state()))
@@ -58,7 +58,7 @@ def _create_save_state() -> None:
 
         screenshot.save(file, format="PNG", pnginfo=extra_chunks)
 
-    context.message = f"State saved to `{target_path[0]}`."
+    context.message = f"State saved to `{target_path}`."
 
 
 def _import_flags_and_vars() -> None:
@@ -69,18 +69,19 @@ def _import_flags_and_vars() -> None:
     if not write_confirmation:
         return
 
-    target_path = plyer.filechooser.open_file(
-        path=str(context.profile.path / "event_vars_and_flags.txt"),
-        filters=[
-            ["Text Files", "*.txt", "*.ini"],
-            ["All Files", "*"],
+    target_path = filedialog.askopenfilename(
+        initialdir=str(context.profile.path),
+        initialfile="event_vars_and_flags.txt",
+        filetypes=[
+            ("Text Files", "*.txt *.ini"),
+            ("All Files", "*.*"),
         ],
     )
-    if target_path is None or len(target_path) != 1:
+    if not target_path:
         return
 
-    file_name = target_path[0].replace("\\", "/").split("/")[-1]
-    affected_flags_and_vars = import_flags_and_vars(target_path[0])
+    file_name = target_path.replace("\\", "/").split("/")[-1]
+    affected_flags_and_vars = import_flags_and_vars(target_path)
     context.message = f"✅ Imported {affected_flags_and_vars:,} flags and vars from {file_name}"
 
 
@@ -123,18 +124,20 @@ def _advance_rtc_hours(hours: int) -> None:
 
 
 def _export_flags_and_vars() -> None:
-    target_path = plyer.filechooser.save_file(
-        path=str(context.profile.path / "event_vars_and_flags.txt"),
-        filters=[
-            ["Text Files", "*.txt", "*.ini"],
-            ["All Files", "*"],
+    target_path = filedialog.asksaveasfilename(
+        initialdir=str(context.profile.path),
+        initialfile="event_vars_and_flags.txt",
+        defaultextension=".txt",
+        filetypes=[
+            ("Text Files", "*.txt *.ini"),
+            ("All Files", "*.*"),
         ],
     )
-    if target_path is None or len(target_path) != 1:
+    if not target_path:
         return
 
-    export_flags_and_vars(target_path[0])
-    context.message = f"✅ Exported flags and vars to " + target_path[0].replace("\\", "/").split("/")[-1]
+    export_flags_and_vars(target_path)
+    context.message = f"✅ Exported flags and vars to " + target_path.replace("\\", "/").split("/")[-1]
 
 
 def _edit_party() -> None:

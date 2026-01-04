@@ -195,7 +195,7 @@ class EmulatorControls:
 
         ttk.Label(group, text="Bot Mode:", justify="left").grid(row=0, sticky="W")
         self.bot_mode_button = ttk.Button(
-            group, text=f"{context.bot_mode} ▾", width=20, padding=(0, 3), cursor="hand2", command=open_bot_mode_menu
+            group, text=f"{context.bot_mode} ▾", width=10, padding=(0, 3), cursor="hand2", command=open_bot_mode_menu
         )
         self.bot_mode_button.grid(row=1, sticky="W", padx=0)
 
@@ -237,8 +237,8 @@ class EmulatorControls:
 
         ttk.Label(group, text="Emulation Speed:", justify="left").grid(row=0, column=0, columnspan=4, sticky="W")
 
-        button_settings = {"width": 4, "padding": (0, 3), "cursor": "hand2"}
-        menu_button_settings = {**button_settings, "width": 6}
+        button_settings = {"width": 2, "padding": (0, 3), "cursor": "hand2"}
+        menu_button_settings = {**button_settings, "width": 3}
         self.speed_1x_button = ttk.Button(group, text="1×", **button_settings, command=lambda: set_emulation_speed(1))
         self.speed_menu_button = ttk.Button(group, text="…", **menu_button_settings, command=open_speed_menu)
         self.unthrottled_button = ttk.Button(group, text="∞", **button_settings, command=lambda: set_emulation_speed(0))
@@ -259,7 +259,7 @@ class EmulatorControls:
 
         ttk.Label(group, text="Other Settings:").grid(row=0, columnspan=2, sticky="W")
 
-        button_settings = {"width": 6, "padding": (0, 3), "cursor": "hand2"}
+        button_settings = {"width": 4, "padding": (0, 3), "cursor": "hand2"}
         self.toggle_video_button = ttk.Button(group, text="Video", **button_settings, command=context.toggle_video)
         self.toggle_audio_button = ttk.Button(group, text="Audio", **button_settings, command=context.toggle_audio)
 
