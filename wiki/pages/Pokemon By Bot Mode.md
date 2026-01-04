@@ -1,4 +1,4 @@
-🏠 [`realbot-g3` Wiki Home](../Readme.md)
+🏠 [`realbot-g3` Wiki Home](../README.md)
 
 # 🔎 Pokémon by Bot Mode
 

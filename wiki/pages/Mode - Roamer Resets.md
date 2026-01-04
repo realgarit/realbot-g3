@@ -1,4 +1,4 @@
-🏠 [`realbot-g3` Wiki Home](../Readme.md)
+🏠 [`realbot-g3` Wiki Home](../README.md)
 
 # 🏃 Roamer Reset Mode
 Roamer reset mode helps with finding shiny roaming Pokémon via soft-resetting.

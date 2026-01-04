@@ -1,5 +1,5 @@
 # RealBot G3
-[![Wiki](wiki/images/badge_wiki.svg)](wiki/Readme.md) [![Python 3.12](wiki/images/badge_python.svg)](https://www.python.org/downloads/release/python-3132/) [![Code Formatting](wiki/images/badge_black.svg)](https://github.com/psf/black)
+[![Wiki](wiki/images/badge_wiki.svg)](wiki/README.md) [![Python 3.12](wiki/images/badge_python.svg)](https://www.python.org/downloads/release/python-3132/) [![Code Formatting](wiki/images/badge_black.svg)](https://github.com/psf/black)
 
 **RealBot G3** is a shiny hunting bot for Gen 3. It's built with Python and uses `libmgba` under the hood. It supports Ruby, Sapphire, Emerald, FireRed, and LeafGreen.
 

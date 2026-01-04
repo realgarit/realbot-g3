@@ -1,4 +1,4 @@
-🏠 [`realbot-g3` Wiki Home](../Readme.md)
+🏠 [`realbot-g3` Wiki Home](../README.md)
 
 Bunny hop on the spot with the [Acro Bike](https://bulbapedia.bulbagarden.net/wiki/Acro_Bike), useful for Safari Zone and [repel tricking](https://bulbapedia.bulbagarden.net/wiki/Appendix:Repel_trick) as it doesn't count steps.
 

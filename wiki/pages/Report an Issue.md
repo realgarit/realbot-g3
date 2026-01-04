@@ -1,10 +1,10 @@
-🏠 [`realbot-g3` Wiki Home](../Readme.md)
+🏠 [`realbot-g3` Wiki Home](../README.md)
 
 # 🆘 Reporting an Issue
 
 If you're having issues with the bot, please follow the below steps to report an issue.
 
-- Carefully read the [wiki](../Readme.md) page for the bot mode you are using, or configuration you're trying to change
+- Carefully read the [wiki](../README.md) page for the bot mode you are using, or configuration you're trying to change
     - Read the page thoroughly, and follow all steps
 
 
