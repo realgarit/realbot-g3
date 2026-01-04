@@ -17,7 +17,7 @@ from modules.gui.emulator_screen import EmulatorScreen
 from modules.gui.load_state_window import LoadStateWindow
 from modules.gui.select_profile_screen import SelectProfileScreen
 from modules.libmgba import LibmgbaEmulator, input_map
-from modules.sprites import choose_random_sprite, crop_sprite_square
+from modules.runtime import get_data_path
 from modules.version import pokebot_name, pokebot_version
 
 if TYPE_CHECKING:
@@ -118,9 +118,14 @@ class RealbotGui:
                 from win32com.shell import shell
 
                 shell.SetCurrentProcessExplicitAppUserModelID("40cakes.pokebot-gen3")
-        sprite = crop_sprite_square(choose_random_sprite())
-        self.icon = PIL.ImageTk.PhotoImage(sprite)
-        self.window.iconphoto(False, self.icon)
+        
+        try:
+            sprite = PIL.Image.open(get_data_path() / "logo.png")
+            self.icon = PIL.ImageTk.PhotoImage(sprite)
+            self.window.iconphoto(False, self.icon)
+        except Exception:
+            # Fallback if logo doesn't exist
+            pass
 
     def _reset_screen(self) -> None:
         if self._current_screen is not None:

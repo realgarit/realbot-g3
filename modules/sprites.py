@@ -1,4 +1,3 @@
-import random
 from pathlib import Path
 
 import PIL.Image
@@ -6,25 +5,7 @@ import PIL.ImageDraw
 
 from modules.files import make_string_safe_for_file_name
 from modules.pokemon import Pokemon, Species
-from modules.runtime import get_sprites_path
-
-
-def choose_random_sprite() -> Path:
-    """
-    :return: Path to a random Pokémon sprite file
-    """
-    rand = random.randint(0, 99)
-    match rand:
-        case _ if rand < 10:
-            icon_dir = get_sprites_path() / "pokemon" / "shiny"
-        case _ if rand < 99:
-            icon_dir = get_sprites_path() / "pokemon" / "normal"
-        case _:
-            icon_dir = get_sprites_path() / "pokemon" / "anti-shiny"
-
-    files = [x for x in icon_dir.glob("*.png") if x.is_file()]
-
-    return random.choice(files)
+from modules.runtime import get_sprites_path, get_data_path
 
 
 def crop_sprite_square(path: Path) -> PIL.Image:
@@ -72,7 +53,7 @@ def crop_sprite_square(path: Path) -> PIL.Image:
 
 def generate_placeholder_image(width: int, height: int) -> PIL.Image:
     """
-    Create a black placeholder image with a random sprite in the middle.
+    Create a black placeholder image with the custom logo in the middle.
     :param width: Image width
     :param height: Image height
     :return: The generated image
@@ -83,8 +64,12 @@ def generate_placeholder_image(width: int, height: int) -> PIL.Image:
     # Black background
     draw.rectangle(xy=[(0, 0), (placeholder.width, placeholder.height)], fill="#000000FF")
 
-    # Paste a random sprite on top
-    sprite = PIL.Image.open(choose_random_sprite())
+    # Paste the logo on top
+    logo_path = get_data_path() / "logo.png"
+    if not logo_path.exists():
+        return placeholder
+
+    sprite = PIL.Image.open(logo_path)
     if sprite.mode != "RGBA":
         sprite = sprite.convert("RGBA")
     sprite_position = (placeholder.width // 2 - sprite.width // 2, placeholder.height // 2 - sprite.height // 2)

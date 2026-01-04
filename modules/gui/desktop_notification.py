@@ -5,7 +5,7 @@ from notifypy.exceptions import UnsupportedPlatform
 
 from modules.console import console
 from modules.context import context
-from modules.sprites import choose_random_sprite
+from modules.runtime import get_data_path
 from modules.version import pokebot_name, pokebot_version
 
 
@@ -14,7 +14,7 @@ def desktop_notification(title: str, message: str, icon: Path = None) -> None:
         return
 
     try:
-        icon = icon or choose_random_sprite()
+        icon = icon or (get_data_path() / "logo.png")
 
         notification = Notify(
             default_notification_application_name=f"{context.profile.path.name} | {pokebot_name} {pokebot_version}"
