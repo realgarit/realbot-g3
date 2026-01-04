@@ -6,15 +6,19 @@ from modules.items.items import Item
 from modules.pokemon.pokemon import Pokemon, Move
 
 
-class BattleStrategy:
+from abc import ABC, abstractmethod
+
+class BattleStrategy(ABC):
+    @abstractmethod
     def party_can_battle(self) -> bool:
         """
         Decides whether the party is in good enough shape to battle, or whether it needs healing.
         :return: True if the party is in a battle-worthy shape or False if it should be healed as
                  soon as possible,
         """
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def pokemon_can_battle(self, pokemon: Pokemon) -> bool:
         """
         Decides whether a given Pokemon is capable and in good enough shape to
@@ -22,8 +26,9 @@ class BattleStrategy:
         :param pokemon: The Pokemon to check.
         :return: True if the Pokemon is a good match
         """
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def which_move_should_be_replaced(self, pokemon: Pokemon, new_move: Move) -> int:
         """
         Decides whether a new move should be learned or not.
@@ -31,7 +36,7 @@ class BattleStrategy:
         :param new_move: The move that is about to be learned.
         :return: The index of the move that should be replaced (0-3) or 4 if the new move should not be learned.
         """
-        raise NotImplementedError
+        pass
 
     def should_allow_evolution(self, pokemon: Pokemon, party_index: int) -> bool:
         """
@@ -41,8 +46,9 @@ class BattleStrategy:
         :param party_index: That Pokémon's party index.
         :return: True if the evolution should happen, False if it should be cancelled.
         """
-        raise NotImplementedError
+        return True
 
+    @abstractmethod
     def should_flee_after_faint(self, battle_state: BattleState) -> bool:
         """
         This is called during wild encounters after the lead Pokemon has fainted, to decide
@@ -50,8 +56,9 @@ class BattleStrategy:
         :param battle_state: Data structure about the current state of the battle.
         :return: True if we should try to run away, False otherwise.
         """
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def choose_new_lead_after_battle(self) -> int | None:
         """
         Is called after a battle to decide whether the lead should be rotated (for example because
@@ -59,16 +66,18 @@ class BattleStrategy:
         :return: The party index of the Pokemon that should be rotated to the top of the party, or None if not change
                  is required.
         """
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def choose_new_lead_after_faint(self, battle_state: BattleState) -> int:
         """
         Decides which new Pokemon to switch in after the current lead has fainted.
         :param battle_state: Data structure about the current state of the battle.
         :return: The party index of the Pokemon that should be switched in.
         """
-        raise NotImplementedError
+        pass
 
+    @abstractmethod
     def decide_turn(self, battle_state: BattleState) -> tuple["TurnAction", any]:
         """
         This is called at the start of every turn and should return a decision on what action to take.
@@ -76,7 +85,7 @@ class BattleStrategy:
         :return: The action that should be taken. Use `TurnAction.use_move()`, `TurnAction.rotate_lead()`,
                  `TurnAction.use_item()` or `TurnAction.run_away()` to generate the return value.
         """
-        raise NotImplementedError
+        pass
 
     def decide_turn_in_double_battle(self, battle_state: BattleState, battler_index: int) -> tuple["TurnAction", any]:
         """

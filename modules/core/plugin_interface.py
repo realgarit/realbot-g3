@@ -1,5 +1,6 @@
 # Copyright (c) 2026 realgarit
 from typing import TYPE_CHECKING, Iterable, Generator
+from abc import ABC
 
 if TYPE_CHECKING:
     from modules.battle.battle_state import BattleOutcome
@@ -9,7 +10,7 @@ if TYPE_CHECKING:
     from modules.core.profiles import Profile
 
 
-class BotPlugin:
+class BotPlugin(ABC):
     def get_additional_bot_modes(self) -> Iterable[type["BotMode"]]:
         """
         This hook can return an iterable (i.e. a list, tuple, or generator) of bot modes

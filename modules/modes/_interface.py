@@ -22,13 +22,16 @@ class BattleAction(Enum):
     CustomAction = auto()
 
 
-class BotMode:
+from abc import ABC, abstractmethod
+
+class BotMode(ABC):
     @staticmethod
+    @abstractmethod
     def name() -> str:
         """
         :return: The name of this mode that will be displayed in the bot mode selection drop-down.
         """
-        raise NotImplementedError
+        pass
 
     @staticmethod
     def is_selectable() -> bool:
@@ -50,6 +53,7 @@ class BotMode:
         """
         return True
 
+    @abstractmethod
     def run(self) -> Generator:
         """
         Contains the actual handling code.
@@ -63,7 +67,7 @@ class BotMode:
         can be prevented by making `self.disable_default_battle_handler()` return `True`,
         in which case this Generator function will also be called inside of battles.
         """
-        raise NotImplementedError
+        pass
 
     def on_battle_started(self, encounter: "EncounterInfo | None") -> "BattleAction | BattleStrategy | None":
         """
