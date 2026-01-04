@@ -7,7 +7,6 @@ from typing import TYPE_CHECKING
 import PIL.Image
 import PIL.ImageTk
 import darkdetect
-from ttkthemes import ThemedTk
 
 from modules.console import console
 from modules.context import context
@@ -28,12 +27,21 @@ if TYPE_CHECKING:
 
 class RealbotGui:
     def __init__(self, main_loop: callable, on_exit: callable, no_theme: bool = False, use_opengl: bool = False):
+        self.window = Tk(className="RealBot")
+
         if not no_theme:
-            theme = "equilux" if darkdetect.isDark() else "clam"
-            self.window = ThemedTk(className="RealBot", theme=theme)
+            # Use built-in ttk themes for Tk 9.0 compatibility
+            style = ttk.Style()
+            if platform.system() == "Darwin":
+                # On macOS, 'aqua' theme automatically respects system dark/light mode
+                style.theme_use("aqua")
+            else:
+                # On other platforms, use 'clam' theme
+                # Note: 'clam' doesn't have dark mode, but it's a clean modern theme
+                style.theme_use("clam")
         else:
-            self.window = Tk(className="RealBot")
-            ttk.Style().theme_use("default")
+            style = ttk.Style()
+            style.theme_use("default")
         self._current_screen = None
         self._main_loop = main_loop
         self._on_exit = on_exit

@@ -27,7 +27,6 @@ required_modules = [
     "plyer~=2.1.0",
     "notify-py~=0.3.42",
     "apispec~=6.3.0",
-    "ttkthemes~=3.2.2",
     "darkdetect~=0.8.0",
     "show-in-file-manager~=1.1.4",
     "aiohttp~=3.10.9",
