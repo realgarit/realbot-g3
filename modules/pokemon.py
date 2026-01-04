@@ -456,6 +456,12 @@ class Pokemon:
             return self.stats.hp
 
     @property
+    def current_hp_percentage(self) -> float:
+        if self.stats.hp == 0:
+            return 0.0
+        return (self.current_hp / self.stats.hp) * 100
+
+    @property
     def status_condition(self) -> StatusCondition:
         if len(self.data) == 100:
             return StatusCondition.from_bitfield(unpack_uint32(self.data[80:84]))

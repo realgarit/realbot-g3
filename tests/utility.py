@@ -67,6 +67,9 @@ class MockStatsDatabase:
     def reset_shiny_phase(self, encounter: "Encounter"):
         pass
 
+    def has_encounter_with_personality_value(self, personality_value: int) -> bool:
+        return False
+
 
 OnBattleStartedType: TypeAlias = Callable[["EncounterInfo | None"], "BattleAction | BattleOutcome | None"]
 OnBattleEndedType: TypeAlias = Callable[["BattleOutcome"], None]
