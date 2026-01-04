@@ -2,17 +2,17 @@
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.game import get_symbol_name_before
+from modules.game.game import get_symbol_name_before
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.memory import (
+from modules.game.memory import (
     get_game_state,
     get_symbol,
     read_symbol,
     unpack_uint32,
     GameState,
 )
-from modules.tasks import (
+from modules.core.tasks import (
     get_global_script_context,
     get_immediate_script_context,
     get_tasks,
@@ -20,7 +20,7 @@ from modules.tasks import (
 )
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class TasksTab(DebugTab):

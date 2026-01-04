@@ -2,16 +2,16 @@
 import random
 from typing import Generator, Callable
 
-from modules.context import context
-from modules.encounter import handle_encounter, EncounterInfo
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
 from modules.gui.multi_select_window import Selection, ask_for_choice
-from modules.map_data import MapFRLG, MapRSE
-from modules.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.menus.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
 from modules.modes.util.walking import navigate_to
-from modules.player import get_player_avatar
-from modules.pokemon_party import get_party_size, get_party
-from modules.runtime import get_sprites_path
-from modules.save_data import get_save_data
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon_party import get_party_size, get_party
+from modules.core.runtime import get_sprites_path
+from modules.game.save_data import get_save_data
 from ._asserts import SavedMapLocation, assert_save_game_exists, assert_saved_on_map
 from ._interface import BattleAction, BotMode, BotModeError
 from .util import (

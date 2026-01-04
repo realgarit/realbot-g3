@@ -9,8 +9,8 @@ import PIL.Image
 import PIL.ImageDraw
 import PIL.ImageTk
 
-from modules.context import context
-from modules.runtime import get_sprites_path
+from modules.core.context import context
+from modules.core.runtime import get_sprites_path
 
 
 class LoadStateWindow:

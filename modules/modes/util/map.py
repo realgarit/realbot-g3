@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
-from modules.map import MapLocation
-from modules.map_data import MapFRLG, PokemonCenter, MapRSE, get_map_enum
-from modules.map_path import calculate_path, PathFindingError
+from modules.map.map import MapLocation
+from modules.map.map_data import MapFRLG, PokemonCenter, MapRSE, get_map_enum
+from modules.map.map_path import calculate_path, PathFindingError
 from modules.modes import BotModeError
-from modules.player import get_player_location
+from modules.player.player import get_player_location
 
 _closest_pokemon_centers: dict[MapFRLG | MapRSE, list[PokemonCenter]] = {
     # Hoenn

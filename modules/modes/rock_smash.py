@@ -3,20 +3,20 @@ import contextlib
 from collections import deque
 from typing import Generator
 
-from modules.battle_state import BattleOutcome
-from modules.context import context
-from modules.debug import debug
-from modules.encounter import handle_encounter, EncounterInfo
+from modules.battle.battle_state import BattleOutcome
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
 from modules.gui.multi_select_window import Selection, ask_for_choice
-from modules.items import get_item_bag, get_item_by_name
-from modules.map_data import MapRSE, is_safari_map
-from modules.map_path import calculate_path
-from modules.memory import get_event_flag, read_symbol, unpack_uint16
-from modules.player import TileTransitionState, get_player, get_player_avatar, AvatarFlags, get_player_location
-from modules.runtime import get_sprites_path
+from modules.items.items import get_item_bag, get_item_by_name
+from modules.map.map_data import MapRSE, is_safari_map
+from modules.map.map_path import calculate_path
+from modules.game.memory import get_event_flag, read_symbol, unpack_uint16
+from modules.player.player import TileTransitionState, get_player, get_player_avatar, AvatarFlags, get_player_location
+from modules.core.runtime import get_sprites_path
 from modules.safari_strategy import get_safari_balls_left
-from modules.save_data import get_save_data
-from modules.tasks import task_is_active, get_global_script_context
+from modules.game.save_data import get_save_data
+from modules.core.tasks import task_is_active, get_global_script_context
 from . import BattleAction
 from ._asserts import (
     SavedMapLocation,

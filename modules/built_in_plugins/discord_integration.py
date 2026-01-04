@@ -3,7 +3,7 @@ import random
 from threading import Thread
 from typing import TYPE_CHECKING, Generator
 
-from modules.context import context
+from modules.core.context import context
 from modules.discord import (
     discord_message_thread,
     DiscordMessage,
@@ -11,17 +11,17 @@ from modules.discord import (
     discord_send,
     discord_rich_presence_loop,
 )
-from modules.encounter import EncounterValue
-from modules.plugin_interface import BotPlugin
-from modules.runtime import get_sprites_path
-from modules.sprites import get_shiny_sprite, get_regular_sprite, get_anti_shiny_sprite
-from modules.stats import EncounterSummary, GlobalStats
+from modules.pokemon.encounter import EncounterValue
+from modules.core.plugin_interface import BotPlugin
+from modules.core.runtime import get_sprites_path
+from modules.game.sprites import get_shiny_sprite, get_regular_sprite, get_anti_shiny_sprite
+from modules.stats.stats import EncounterSummary, GlobalStats
 
 if TYPE_CHECKING:
     from modules.config.schemas_v1 import DiscordWebhook
-    from modules.encounter import EncounterInfo
-    from modules.pokemon import Pokemon
-    from modules.profiles import Profile
+    from modules.pokemon.encounter import EncounterInfo
+    from modules.pokemon.pokemon import Pokemon
+    from modules.core.profiles import Profile
 
 
 def iv_table(pokemon: "Pokemon") -> str:

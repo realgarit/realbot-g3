@@ -12,19 +12,19 @@ from rich.console import Console
 sys.path.append(str(Path(__file__).parent.parent))
 
 from modules.modes._interface import BotMode
-from modules.context import context
+from modules.core.context import context
 import modules.gui.multi_select_window
 
 if TYPE_CHECKING:
-    from modules.battle_state import BattleOutcome
-    from modules.encounter import EncounterInfo
-    from modules.fishing import FishingAttempt
-    from modules.items import Item
+    from modules.battle.battle_state import BattleOutcome
+    from modules.pokemon.encounter import EncounterInfo
+    from modules.items.fishing import FishingAttempt
+    from modules.items.items import Item
     from modules.modes import FrameInfo, BattleAction
-    from modules.pokemon import Pokemon
-    from modules.profiles import Profile
-    from modules.roms import ROM
-    from modules.stats import Encounter
+    from modules.pokemon.pokemon import Pokemon
+    from modules.core.profiles import Profile
+    from modules.game.roms import ROM
+    from modules.stats.stats import Encounter
 
 
 class MockStatsDatabase:
@@ -36,7 +36,7 @@ class MockStatsDatabase:
         self.logged_encounters: list["Encounter"] = []
 
     def log_encounter(self, encounter_info: "EncounterInfo") -> "Encounter":
-        from modules.stats import Encounter
+        from modules.stats.stats import Encounter
 
         self.last_encounter = Encounter(
             1,
@@ -229,8 +229,8 @@ def _set_up_test_emulator(profile: "Profile"):
     from modules.config import Config
     from modules.config.schemas_v1 import Logging, LoggingSavePK3
 
-    from modules.game import set_rom
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.game import set_rom
+    from modules.game.libmgba import LibmgbaEmulator
     from modules.modes import get_bot_listeners
 
     context.testing = True
@@ -261,8 +261,8 @@ def _set_up_test_emulator(profile: "Profile"):
 
 def _load_test_state(state_file: Path) -> None:
 
-    from modules.profiles import Profile
-    from modules.save_import import guess_rom_from_save_state
+    from modules.core.profiles import Profile
+    from modules.game.save_import import guess_rom_from_save_state
 
     with open(state_file, "rb") as handle:
         rom, state_data, save_data = guess_rom_from_save_state(handle, None)
@@ -275,9 +275,9 @@ def _load_test_state(state_file: Path) -> None:
 
 def _run_test(test_generator: Generator) -> None:
 
-    from modules.memory import get_game_state
+    from modules.game.memory import get_game_state
     from modules.modes import get_bot_listeners, FrameInfo
-    from modules.tasks import get_global_script_context, get_tasks
+    from modules.core.tasks import get_global_script_context, get_tasks
 
     previous_frame_info: "FrameInfo | None" = None
     bot_mode = AutomatedTestBotMode(test_generator)
@@ -383,12 +383,12 @@ mocked_ask_for_choice = ask_for_choice_patcher.start()
 wait_for_unique_rng_value_patcher = mock.patch("modules.modes.util.wait_for_unique_rng_value")
 mocked_wait_for_unique_rng_value = wait_for_unique_rng_value_patcher.start()
 
-console_patcher = mock.patch("modules.console.console", new=Console(quiet=True))
+console_patcher = mock.patch("modules.core.console.console", new=Console(quiet=True))
 console_patcher.start()
 
 
 def set_next_rng_seed(rng_seed: int) -> None:
-    from modules.memory import write_symbol, pack_uint32
+    from modules.game.memory import write_symbol, pack_uint32
 
     rng_value = rng_seed
     write_symbol("gRngValue", pack_uint32(rng_value))
@@ -409,7 +409,7 @@ def set_next_choice(next_choice: str) -> None:
 class BotTestCase(unittest.TestCase):
     @property
     def bot_mode(self) -> AutomatedTestBotMode:
-        from modules.context import context
+        from modules.core.context import context
 
         if context.bot_mode == AutomatedTestBotMode.name():
             return context.bot_mode_instance
@@ -420,25 +420,25 @@ class BotTestCase(unittest.TestCase):
 
     @property
     def stats(self) -> MockStatsDatabase:
-        from modules.context import context
+        from modules.core.context import context
 
         return context.stats
 
     @property
     def rom(self) -> "ROM":
-        from modules.context import context
+        from modules.core.context import context
 
         return context.rom
 
     def assertIsInManualMode(self) -> None:
-        from modules.context import context
+        from modules.core.context import context
 
         self.assertEqual(
             "Manual", context.bot_mode, f"Expected bot to be in Manual mode, but it is in {context.bot_mode} mode."
         )
 
     def assertIsNotInManualMode(self) -> None:
-        from modules.context import context
+        from modules.core.context import context
 
         self.assertEqual(
             context.bot_mode,

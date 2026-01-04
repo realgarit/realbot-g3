@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.context import context
+from modules.core.context import context
 from modules.modes import get_bot_mode_names
 
 route = web.RouteTableDef()

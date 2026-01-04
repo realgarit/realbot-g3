@@ -2,21 +2,21 @@
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.battle_state import battle_is_active, get_battle_state
-from modules.game import decode_string, get_symbol_name, get_symbol_name_before
+from modules.battle.battle_state import battle_is_active, get_battle_state
+from modules.game.game import decode_string, get_symbol_name, get_symbol_name_before
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.memory import (
+from modules.game.memory import (
     game_has_started,
     get_symbol,
     read_symbol,
     unpack_uint16,
     unpack_uint32,
 )
-from modules.pokemon import get_species_by_index
+from modules.pokemon.pokemon import get_species_by_index
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class BattleTab(DebugTab):

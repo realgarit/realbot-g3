@@ -1,11 +1,11 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator, Literal
 
-from modules.context import context
-from modules.debug import debug
-from modules.tasks import get_global_script_context, task_is_active, get_task, is_waiting_for_input
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.core.tasks import get_global_script_context, task_is_active, get_task, is_waiting_for_input
 from .sleep import wait_for_n_frames
-from ...menuing import is_fade_active
+from modules.menus.menuing import is_fade_active
 
 
 @debug.track

@@ -30,7 +30,7 @@ class TestSpin(BotTestCase):
     )
     @with_frame_timeout(5000)
     def test_it_catches_shinies(self):
-        from modules.battle_state import BattleOutcome
+        from modules.battle.battle_state import BattleOutcome
         from modules.modes.spin import SpinMode
 
         while True:

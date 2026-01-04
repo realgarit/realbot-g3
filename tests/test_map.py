@@ -4,14 +4,14 @@ Unit tests for modules/map.py
 """
 
 import unittest
-import modules.map
+import modules.map.map
 
 from datetime import datetime
-from modules.pokemon_party import PartyPokemon
-from modules.pokemon import get_species_by_index
-from modules.context import context
-from modules.profiles import Profile
-from modules.roms import ROM, ROMLanguage
+from modules.pokemon.pokemon_party import PartyPokemon
+from modules.pokemon.pokemon import get_species_by_index
+from modules.core.context import context
+from modules.core.profiles import Profile
+from modules.game.roms import ROM, ROMLanguage
 
 # Common lead definitions
 regular_lead = bytearray(
@@ -54,49 +54,49 @@ relicanth = get_species_by_index(381)
 
 # Common route encounters definitions
 granite_cave_rock_smash = [
-    modules.map.WildEncounter(geodude, 10, 15, 60),
-    modules.map.WildEncounter(nosepass, 10, 20, 30),
-    modules.map.WildEncounter(geodude, 5, 10, 5),
-    modules.map.WildEncounter(geodude, 15, 20, 4),
-    modules.map.WildEncounter(geodude, 15, 20, 1),
+    modules.map.map.WildEncounter(geodude, 10, 15, 60),
+    modules.map.map.WildEncounter(nosepass, 10, 20, 30),
+    modules.map.map.WildEncounter(geodude, 5, 10, 5),
+    modules.map.map.WildEncounter(geodude, 15, 20, 4),
+    modules.map.map.WildEncounter(geodude, 15, 20, 1),
 ]
 
 route113_land = [
-    modules.map.WildEncounter(spinda, 15, 15, 20),
-    modules.map.WildEncounter(spinda, 15, 15, 20),
-    modules.map.WildEncounter(slugma, 15, 15, 10),
-    modules.map.WildEncounter(spinda, 14, 14, 10),
-    modules.map.WildEncounter(spinda, 14, 14, 10),
-    modules.map.WildEncounter(slugma, 14, 14, 10),
-    modules.map.WildEncounter(spinda, 16, 16, 5),
-    modules.map.WildEncounter(slugma, 16, 16, 5),
-    modules.map.WildEncounter(spinda, 16, 16, 4),
-    modules.map.WildEncounter(skarmory, 16, 16, 4),
-    modules.map.WildEncounter(spinda, 16, 16, 1),
-    modules.map.WildEncounter(skarmory, 16, 16, 1),
+    modules.map.map.WildEncounter(spinda, 15, 15, 20),
+    modules.map.map.WildEncounter(spinda, 15, 15, 20),
+    modules.map.map.WildEncounter(slugma, 15, 15, 10),
+    modules.map.map.WildEncounter(spinda, 14, 14, 10),
+    modules.map.map.WildEncounter(spinda, 14, 14, 10),
+    modules.map.map.WildEncounter(slugma, 14, 14, 10),
+    modules.map.map.WildEncounter(spinda, 16, 16, 5),
+    modules.map.map.WildEncounter(slugma, 16, 16, 5),
+    modules.map.map.WildEncounter(spinda, 16, 16, 4),
+    modules.map.map.WildEncounter(skarmory, 16, 16, 4),
+    modules.map.map.WildEncounter(spinda, 16, 16, 1),
+    modules.map.map.WildEncounter(skarmory, 16, 16, 1),
 ]
 
 route110_land = [
-    modules.map.WildEncounter(poochyena, 12, 12, 20),
-    modules.map.WildEncounter(electrike, 12, 12, 20),
-    modules.map.WildEncounter(gulpin, 12, 12, 10),
-    modules.map.WildEncounter(electrike, 13, 13, 10),
-    modules.map.WildEncounter(minun, 13, 13, 10),
-    modules.map.WildEncounter(oddish, 13, 13, 10),
-    modules.map.WildEncounter(minun, 13, 13, 5),
-    modules.map.WildEncounter(gulpin, 13, 13, 5),
-    modules.map.WildEncounter(wingull, 12, 12, 4),
-    modules.map.WildEncounter(wingull, 12, 12, 4),
-    modules.map.WildEncounter(plusle, 12, 12, 1),
-    modules.map.WildEncounter(plusle, 13, 13, 1),
+    modules.map.map.WildEncounter(poochyena, 12, 12, 20),
+    modules.map.map.WildEncounter(electrike, 12, 12, 20),
+    modules.map.map.WildEncounter(gulpin, 12, 12, 10),
+    modules.map.map.WildEncounter(electrike, 13, 13, 10),
+    modules.map.map.WildEncounter(minun, 13, 13, 10),
+    modules.map.map.WildEncounter(oddish, 13, 13, 10),
+    modules.map.map.WildEncounter(minun, 13, 13, 5),
+    modules.map.map.WildEncounter(gulpin, 13, 13, 5),
+    modules.map.map.WildEncounter(wingull, 12, 12, 4),
+    modules.map.map.WildEncounter(wingull, 12, 12, 4),
+    modules.map.map.WildEncounter(plusle, 12, 12, 1),
+    modules.map.map.WildEncounter(plusle, 13, 13, 1),
 ]
 
 underwater = [
-    modules.map.WildEncounter(clamperl, 20, 30, 60),
-    modules.map.WildEncounter(chinchou, 20, 30, 30),
-    modules.map.WildEncounter(clamperl, 30, 35, 5),
-    modules.map.WildEncounter(relicanth, 30, 35, 4),
-    modules.map.WildEncounter(relicanth, 30, 35, 1),
+    modules.map.map.WildEncounter(clamperl, 20, 30, 60),
+    modules.map.map.WildEncounter(chinchou, 20, 30, 30),
+    modules.map.map.WildEncounter(clamperl, 30, 35, 5),
+    modules.map.map.WildEncounter(relicanth, 30, 35, 4),
+    modules.map.map.WildEncounter(relicanth, 30, 35, 1),
 ]
 
 
@@ -107,7 +107,7 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
     # assertCountEqual asserts exact equality between elements, which means floating point rounding can cause an
     # otherwise sound test to fail.
     def assertEffectiveEncountersEqual(
-        self, first: list[modules.map.EffectiveWildEncounter], second: list[modules.map.EffectiveWildEncounter]
+        self, first: list[modules.map.map.EffectiveWildEncounter], second: list[modules.map.map.EffectiveWildEncounter]
     ):
         for encounter in first:
             found = False
@@ -138,37 +138,37 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
 
     def test_route102_plain(self):
         encounters = [
-            modules.map.WildEncounter(poochyena, 3, 3, 20),
-            modules.map.WildEncounter(wurmple, 3, 3, 20),
-            modules.map.WildEncounter(poochyena, 4, 4, 10),
-            modules.map.WildEncounter(wurmple, 4, 4, 10),
-            modules.map.WildEncounter(lotad, 3, 3, 10),
-            modules.map.WildEncounter(lotad, 4, 4, 10),
-            modules.map.WildEncounter(zigzagoon, 3, 3, 5),
-            modules.map.WildEncounter(zigzagoon, 3, 3, 5),
-            modules.map.WildEncounter(zigzagoon, 4, 4, 4),
-            modules.map.WildEncounter(ralts, 4, 4, 4),
-            modules.map.WildEncounter(zigzagoon, 4, 4, 1),
-            modules.map.WildEncounter(seedot, 3, 3, 1),
+            modules.map.map.WildEncounter(poochyena, 3, 3, 20),
+            modules.map.map.WildEncounter(wurmple, 3, 3, 20),
+            modules.map.map.WildEncounter(poochyena, 4, 4, 10),
+            modules.map.map.WildEncounter(wurmple, 4, 4, 10),
+            modules.map.map.WildEncounter(lotad, 3, 3, 10),
+            modules.map.map.WildEncounter(lotad, 4, 4, 10),
+            modules.map.map.WildEncounter(zigzagoon, 3, 3, 5),
+            modules.map.map.WildEncounter(zigzagoon, 3, 3, 5),
+            modules.map.map.WildEncounter(zigzagoon, 4, 4, 4),
+            modules.map.map.WildEncounter(ralts, 4, 4, 4),
+            modules.map.map.WildEncounter(zigzagoon, 4, 4, 1),
+            modules.map.map.WildEncounter(seedot, 3, 3, 1),
         ]
         party_lead = PartyPokemon(regular_lead, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(poochyena, 3, 4, 0.3),
-            modules.map.EffectiveWildEncounter(wurmple, 3, 4, 0.3),
-            modules.map.EffectiveWildEncounter(lotad, 3, 4, 0.2),
-            modules.map.EffectiveWildEncounter(zigzagoon, 3, 4, 0.15),
-            modules.map.EffectiveWildEncounter(ralts, 4, 4, 0.04),
-            modules.map.EffectiveWildEncounter(seedot, 3, 3, 0.01),
+            modules.map.map.EffectiveWildEncounter(poochyena, 3, 4, 0.3),
+            modules.map.map.EffectiveWildEncounter(wurmple, 3, 4, 0.3),
+            modules.map.map.EffectiveWildEncounter(lotad, 3, 4, 0.2),
+            modules.map.map.EffectiveWildEncounter(zigzagoon, 3, 4, 0.15),
+            modules.map.map.EffectiveWildEncounter(ralts, 4, 4, 0.04),
+            modules.map.map.EffectiveWildEncounter(seedot, 3, 3, 0.01),
         ]
 
-        got = modules.map._calculate_effective_encounters(encounters, "land", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(encounters, "land", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
     def test_empty_encounters(self):
         party_lead = PartyPokemon(regular_lead, 0)
-        got = modules.map._calculate_effective_encounters([], "rock_smash", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters([], "rock_smash", party_lead, 0)
         # Importantly, doesn't crash.
         self.assertEqual(got, [])
 
@@ -178,11 +178,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(regular_lead, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 5, 20, 0.7),
-            modules.map.EffectiveWildEncounter(nosepass, 10, 20, 0.3),
+            modules.map.map.EffectiveWildEncounter(geodude, 5, 20, 0.7),
+            modules.map.map.EffectiveWildEncounter(nosepass, 10, 20, 0.3),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -190,11 +190,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(regular_lead, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 13, 20, 154 / 250),
-            modules.map.EffectiveWildEncounter(nosepass, 13, 20, 48 / 125),
+            modules.map.map.EffectiveWildEncounter(geodude, 13, 20, 154 / 250),
+            modules.map.map.EffectiveWildEncounter(nosepass, 13, 20, 48 / 125),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -202,11 +202,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(pressure, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 5, 20, 0.7),
-            modules.map.EffectiveWildEncounter(nosepass, 10, 20, 0.3),
+            modules.map.map.EffectiveWildEncounter(geodude, 5, 20, 0.7),
+            modules.map.map.EffectiveWildEncounter(nosepass, 10, 20, 0.3),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -214,11 +214,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(intimidate21, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 5, 20, 242 / 377),
-            modules.map.EffectiveWildEncounter(nosepass, 10, 20, 135 / 377),
+            modules.map.map.EffectiveWildEncounter(geodude, 5, 20, 242 / 377),
+            modules.map.map.EffectiveWildEncounter(nosepass, 10, 20, 135 / 377),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -226,11 +226,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(intimidate21, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 13, 20, 253 / 469),
-            modules.map.EffectiveWildEncounter(nosepass, 13, 20, 216 / 469),
+            modules.map.map.EffectiveWildEncounter(geodude, 13, 20, 253 / 469),
+            modules.map.map.EffectiveWildEncounter(nosepass, 13, 20, 216 / 469),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -238,11 +238,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(pressure, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(geodude, 13, 20, 110 / 167),
-            modules.map.EffectiveWildEncounter(nosepass, 13, 20, 57 / 167),
+            modules.map.map.EffectiveWildEncounter(geodude, 13, 20, 110 / 167),
+            modules.map.map.EffectiveWildEncounter(nosepass, 13, 20, 57 / 167),
         ]
 
-        got = modules.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
+        got = modules.map.map._calculate_effective_encounters(granite_cave_rock_smash, "rock_smash", party_lead, 13)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -251,12 +251,12 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(magnet_pull, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(spinda, 14, 16, 0.35),
-            modules.map.EffectiveWildEncounter(slugma, 14, 16, 0.125),
-            modules.map.EffectiveWildEncounter(skarmory, 16, 16, 0.525),
+            modules.map.map.EffectiveWildEncounter(spinda, 14, 16, 0.35),
+            modules.map.map.EffectiveWildEncounter(slugma, 14, 16, 0.125),
+            modules.map.map.EffectiveWildEncounter(skarmory, 16, 16, 0.525),
         ]
 
-        got = modules.map._calculate_effective_encounters(route113_land, "land", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(route113_land, "land", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -264,12 +264,12 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(magnet_pull, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(spinda, 16, 16, 1 / 12),
-            modules.map.EffectiveWildEncounter(slugma, 16, 16, 1 / 24),
-            modules.map.EffectiveWildEncounter(skarmory, 16, 16, 0.875),
+            modules.map.map.EffectiveWildEncounter(spinda, 16, 16, 1 / 12),
+            modules.map.map.EffectiveWildEncounter(slugma, 16, 16, 1 / 24),
+            modules.map.map.EffectiveWildEncounter(skarmory, 16, 16, 0.875),
         ]
 
-        got = modules.map._calculate_effective_encounters(route113_land, "land", party_lead, 16)
+        got = modules.map.map._calculate_effective_encounters(route113_land, "land", party_lead, 16)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -278,16 +278,16 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(static, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(electrike, 12, 13, 19 / 60),
-            modules.map.EffectiveWildEncounter(minun, 13, 13, 29 / 120),
-            modules.map.EffectiveWildEncounter(plusle, 12, 13, 53 / 300),
-            modules.map.EffectiveWildEncounter(poochyena, 12, 12, 0.1),
-            modules.map.EffectiveWildEncounter(gulpin, 12, 13, 0.075),
-            modules.map.EffectiveWildEncounter(oddish, 13, 13, 0.05),
-            modules.map.EffectiveWildEncounter(wingull, 12, 12, 0.04),
+            modules.map.map.EffectiveWildEncounter(electrike, 12, 13, 19 / 60),
+            modules.map.map.EffectiveWildEncounter(minun, 13, 13, 29 / 120),
+            modules.map.map.EffectiveWildEncounter(plusle, 12, 13, 53 / 300),
+            modules.map.map.EffectiveWildEncounter(poochyena, 12, 12, 0.1),
+            modules.map.map.EffectiveWildEncounter(gulpin, 12, 13, 0.075),
+            modules.map.map.EffectiveWildEncounter(oddish, 13, 13, 0.05),
+            modules.map.map.EffectiveWildEncounter(wingull, 12, 12, 0.04),
         ]
 
-        got = modules.map._calculate_effective_encounters(route110_land, "land", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(route110_land, "land", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -295,14 +295,14 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(static, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(electrike, 13, 13, 80 / 323),
-            modules.map.EffectiveWildEncounter(minun, 13, 13, 145 / 323),
-            modules.map.EffectiveWildEncounter(plusle, 13, 13, 53 / 323),
-            modules.map.EffectiveWildEncounter(gulpin, 13, 13, 15 / 323),
-            modules.map.EffectiveWildEncounter(oddish, 13, 13, 30 / 323),
+            modules.map.map.EffectiveWildEncounter(electrike, 13, 13, 80 / 323),
+            modules.map.map.EffectiveWildEncounter(minun, 13, 13, 145 / 323),
+            modules.map.map.EffectiveWildEncounter(plusle, 13, 13, 53 / 323),
+            modules.map.map.EffectiveWildEncounter(gulpin, 13, 13, 15 / 323),
+            modules.map.map.EffectiveWildEncounter(oddish, 13, 13, 30 / 323),
         ]
 
-        got = modules.map._calculate_effective_encounters(route110_land, "land", party_lead, 13)
+        got = modules.map.map._calculate_effective_encounters(route110_land, "land", party_lead, 13)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -311,12 +311,12 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(static, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(clamperl, 20, 35, 13 / 40),
-            modules.map.EffectiveWildEncounter(chinchou, 20, 30, 13 / 20),
-            modules.map.EffectiveWildEncounter(relicanth, 30, 35, 1 / 40),
+            modules.map.map.EffectiveWildEncounter(clamperl, 20, 35, 13 / 40),
+            modules.map.map.EffectiveWildEncounter(chinchou, 20, 30, 13 / 20),
+            modules.map.map.EffectiveWildEncounter(relicanth, 30, 35, 1 / 40),
         ]
 
-        got = modules.map._calculate_effective_encounters(underwater, "surf", party_lead, 0)
+        got = modules.map.map._calculate_effective_encounters(underwater, "surf", party_lead, 0)
 
         self.assertEffectiveEncountersEqual(got, want)
 
@@ -324,11 +324,11 @@ class TestEffectiveEncounterRatesForCurrentMap(unittest.TestCase):
         party_lead = PartyPokemon(static, 0)
 
         want = [
-            modules.map.EffectiveWildEncounter(clamperl, 26, 35, 71 / 212),
-            modules.map.EffectiveWildEncounter(chinchou, 26, 30, 65 / 106),
-            modules.map.EffectiveWildEncounter(relicanth, 30, 35, 55 / 1060),
+            modules.map.map.EffectiveWildEncounter(clamperl, 26, 35, 71 / 212),
+            modules.map.map.EffectiveWildEncounter(chinchou, 26, 30, 65 / 106),
+            modules.map.map.EffectiveWildEncounter(relicanth, 30, 35, 55 / 1060),
         ]
 
-        got = modules.map._calculate_effective_encounters(underwater, "surf", party_lead, 26)
+        got = modules.map.map._calculate_effective_encounters(underwater, "surf", party_lead, 26)
 
         self.assertEffectiveEncountersEqual(got, want)

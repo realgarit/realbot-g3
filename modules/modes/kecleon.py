@@ -1,14 +1,14 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.encounter import handle_encounter, EncounterInfo
-from modules.items import get_item_by_name
-from modules.map_data import MapRSE
-from modules.memory import get_event_flag
-from modules.player import get_player_avatar, get_player, get_player_location
-from modules.pokemon_party import get_party_size
-from modules.save_data import get_last_heal_location
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
+from modules.items.items import get_item_by_name
+from modules.map.map_data import MapRSE
+from modules.game.memory import get_event_flag
+from modules.player.player import get_player_avatar, get_player, get_player_location
+from modules.pokemon.pokemon_party import get_party_size
+from modules.game.save_data import get_last_heal_location
 from . import BattleAction
 from ._asserts import (
     assert_has_pokemon_with_any_move,

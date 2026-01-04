@@ -2,9 +2,9 @@
 import time
 from tkinter import ttk, Tk, Toplevel, StringVar, IntVar, Canvas
 
-from modules.context import context
-from modules.debug_utilities import debug_write_item_bag
-from modules.items import ItemPocket, get_item_bag, _items_by_index, get_item_by_name, ItemSlot
+from modules.core.context import context
+from modules.debug.debug_utilities import debug_write_item_bag
+from modules.items.items import ItemPocket, get_item_bag, _items_by_index, get_item_by_name, ItemSlot
 
 
 class ItemBagEditMenu:

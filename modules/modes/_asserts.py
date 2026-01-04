@@ -1,17 +1,17 @@
 # Copyright (c) 2026 realgarit
 from dataclasses import dataclass
 
-from modules.context import context
-from modules.items import get_item_bag, get_item_by_name
-from modules.map import ObjectEvent, calculate_targeted_coords
-from modules.map_data import MapRSE, MapFRLG, is_safari_map
-from modules.player import get_player
-from modules.pokemon import pokemon_has_usable_damaging_move
-from modules.pokemon_party import get_party, get_party_size
+from modules.core.context import context
+from modules.items.items import get_item_bag, get_item_by_name
+from modules.map.map import ObjectEvent, calculate_targeted_coords
+from modules.map.map_data import MapRSE, MapFRLG, is_safari_map
+from modules.player.player import get_player
+from modules.pokemon.pokemon import pokemon_has_usable_damaging_move
+from modules.pokemon.pokemon_party import get_party, get_party_size
 from modules.safari_strategy import get_safari_balls_left
-from modules.save_data import get_save_data
+from modules.game.save_data import get_save_data
 from ._interface import BotModeError
-from ..pokemon_storage import get_pokemon_storage
+from modules.pokemon.pokemon_storage import get_pokemon_storage
 
 _error_message_addendum_if_assert_only_failed_in_saved_game = (
     " (This is only the case in the saved game. Perhaps you just need to save again?)"

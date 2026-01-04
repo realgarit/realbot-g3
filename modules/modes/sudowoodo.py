@@ -1,10 +1,10 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.encounter import handle_encounter, log_encounter, EncounterInfo
-from modules.map_data import MapRSE
-from modules.player import get_player_avatar
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, log_encounter, EncounterInfo
+from modules.map.map_data import MapRSE
+from modules.player.player import get_player_avatar
 from ._asserts import (
     SavedMapLocation,
     assert_registered_item,

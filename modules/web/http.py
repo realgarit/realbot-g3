@@ -7,8 +7,8 @@ from aiohttp import web
 from apispec import APISpec
 from apispec.yaml_utils import load_operations_from_docstring
 
-from modules.runtime import get_base_path
-from modules.version import realbot_name, realbot_version
+from modules.core.runtime import get_base_path
+from modules.core.version import realbot_name, realbot_version
 from modules.web.endpoints.controls import route as controls_route
 from modules.web.endpoints.emulator import route as emulator_route
 from modules.web.endpoints.game import route as game_route

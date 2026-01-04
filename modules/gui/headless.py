@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
 from typing import TYPE_CHECKING
 
-from modules.context import context
-from modules.game import set_rom
-from modules.libmgba import LibmgbaEmulator
+from modules.core.context import context
+from modules.game.game import set_rom
+from modules.game.libmgba import LibmgbaEmulator
 
 if TYPE_CHECKING:
     from pokebot import StartupSettings

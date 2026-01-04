@@ -9,21 +9,21 @@ import PIL.Image
 import PIL.ImageTk
 import darkdetect
 
-from modules.console import console
-from modules.context import context
-from modules.debug import debug
-from modules.game import set_rom
+from modules.core.console import console
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.game.game import set_rom
 from modules.gui.create_profile_screen import CreateProfileScreen
 from modules.gui.emulator_screen import EmulatorScreen
 from modules.gui.load_state_window import LoadStateWindow
 from modules.gui.select_profile_screen import SelectProfileScreen
-from modules.libmgba import LibmgbaEmulator, input_map
-from modules.runtime import get_data_path
-from modules.version import realbot_name, realbot_version
+from modules.game.libmgba import LibmgbaEmulator, input_map
+from modules.core.runtime import get_data_path
+from modules.core.version import realbot_name, realbot_version
 
 if TYPE_CHECKING:
     from pokebot import StartupSettings
-    from modules.profiles import Profile
+    from modules.core.profiles import Profile
 
 
 class RealbotGui:

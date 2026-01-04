@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.runtime import get_base_path
+from modules.core.runtime import get_base_path
 
 route = web.RouteTableDef()
 

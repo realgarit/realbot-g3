@@ -1,10 +1,10 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.map import get_map_data_for_current_position
+from modules.core.context import context
+from modules.map.map import get_map_data_for_current_position
 from modules.modes import BattleAction
-from modules.pokemon_party import get_party
+from modules.pokemon.pokemon_party import get_party
 from ._asserts import assert_party_has_damaging_move
 from ._interface import BotMode, BotModeError
 from .util import change_lead_party_pokemon

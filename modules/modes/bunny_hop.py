@@ -1,10 +1,10 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.items import get_item_by_name
-from modules.player import AcroBikeState, TileTransitionState, get_player_avatar
-from modules.battle_state import BattleOutcome
+from modules.core.context import context
+from modules.items.items import get_item_by_name
+from modules.player.player import AcroBikeState, TileTransitionState, get_player_avatar
+from modules.battle.battle_state import BattleOutcome
 from ._asserts import assert_item_exists_in_bag, assert_player_has_poke_balls, assert_boxes_or_party_can_fit_pokemon
 from ._interface import BotMode
 from .util import apply_white_flute_if_available, register_key_item

@@ -2,10 +2,10 @@
 import time
 from tkinter import Tk, Toplevel, ttk, StringVar, Canvas
 
-from modules.context import context
-from modules.debug_utilities import debug_write_pokedex
-from modules.pokedex import get_pokedex
-from modules.pokemon import get_species_by_national_dex
+from modules.core.context import context
+from modules.debug.debug_utilities import debug_write_pokedex
+from modules.pokemon.pokedex import get_pokedex
+from modules.pokemon.pokemon import get_species_by_national_dex
 
 
 class PokedexEditMenu:

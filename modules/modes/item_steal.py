@@ -1,15 +1,15 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.battle_state import BattleOutcome
-from modules.battle_strategies import BattleStrategy
-from modules.battle_strategies.item_stealing import ItemStealingBattleStrategy
-from modules.encounter import EncounterInfo
-from modules.map import get_map_data_for_current_position
+from modules.battle.battle_state import BattleOutcome
+from modules.battle.battle_strategies import BattleStrategy
+from modules.battle.battle_strategies.item_stealing import ItemStealingBattleStrategy
+from modules.pokemon.encounter import EncounterInfo
+from modules.map.map import get_map_data_for_current_position
 from modules.modes import BotMode, BattleAction, BotModeError
 from modules.modes.util import map_has_pokemon_center_nearby
 from modules.modes.util.pokecenter_loop import PokecenterLoopController
-from modules.pokemon_party import get_party
+from modules.pokemon.pokemon_party import get_party
 
 
 class ItemStealMode(BotMode):

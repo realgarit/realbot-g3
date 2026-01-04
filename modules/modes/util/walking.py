@@ -1,14 +1,14 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator, Iterable, Callable
 
-from modules.context import context
-from modules.debug import debug
-from modules.map import get_map_data, get_map_data_for_current_position, get_player_map_object
-from modules.map_data import MapFRLG, MapRSE
-from modules.map_path import calculate_path, Waypoint, PathFindingError, Direction, WaypointAction
-from modules.memory import GameState, get_game_state
-from modules.roms import ROMLanguage
-from modules.player import (
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.map.map import get_map_data, get_map_data_for_current_position, get_player_map_object
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.map.map_path import calculate_path, Waypoint, PathFindingError, Direction, WaypointAction
+from modules.game.memory import GameState, get_game_state
+from modules.game.roms import ROMLanguage
+from modules.player.player import (
     RunningState,
     AcroBikeState,
     TileTransitionState,
@@ -20,10 +20,10 @@ from modules.player import (
     AvatarFlags,
     PlayerAvatar,
 )
-from modules.tasks import get_global_script_context, task_is_active
+from modules.core.tasks import get_global_script_context, task_is_active
 from .sleep import wait_for_n_frames
 from .._interface import BotModeError
-from ...items import get_item_bag, get_item_by_name
+from modules.items.items import get_item_bag, get_item_by_name
 
 
 @debug.track

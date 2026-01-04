@@ -6,8 +6,8 @@ from tkinter import Canvas, PhotoImage, Toplevel, ttk
 
 from rich.prompt import Prompt
 
-from modules.console import console
-from modules.context import context
+from modules.core.console import console
+from modules.core.context import context
 
 
 @dataclass

@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.context import context
+from modules.core.context import context
 
 route = web.RouteTableDef()
 

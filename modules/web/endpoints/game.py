@@ -1,8 +1,8 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.game import _event_flags
-from modules.memory import get_event_flag, get_game_state
+from modules.game.game import _event_flags
+from modules.game.memory import get_event_flag, get_game_state
 from modules.web.state import custom_state
 
 route = web.RouteTableDef()

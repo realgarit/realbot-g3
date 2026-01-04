@@ -2,8 +2,8 @@
 import platform
 import sys
 
-from modules.runtime import get_base_path, is_bundled_app, is_virtualenv
-from modules.version import realbot_name, realbot_version
+from modules.core.runtime import get_base_path, is_bundled_app, is_virtualenv
+from modules.core.version import realbot_name, realbot_version
 
 recommended_python_version = "3.13"
 supported_python_versions = ["3.11", "3.12", "3.13"]

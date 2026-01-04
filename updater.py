@@ -9,9 +9,9 @@ from zipfile import ZipFile
 
 import requests
 
-from modules.console import console
-from modules.runtime import get_base_path
-from modules.version import realbot_version
+from modules.core.console import console
+from modules.core.runtime import get_base_path
+from modules.core.version import realbot_version
 
 
 # Module `exceptions` is not being used, but it needs to be imported because otherwise `modules.console`

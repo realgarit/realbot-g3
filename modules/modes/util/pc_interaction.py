@@ -3,10 +3,10 @@ from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Generator
 
-from modules.context import context
-from modules.game import decode_string
-from modules.memory import get_game_state, get_game_state_symbol, read_symbol, GameState, unpack_uint32
-from modules.menuing import get_scroll_direction
+from modules.core.context import context
+from modules.game.game import decode_string
+from modules.game.memory import get_game_state, get_game_state_symbol, read_symbol, GameState, unpack_uint32
+from modules.menus.menuing import get_scroll_direction
 from modules.modes import BotModeError
 from modules.modes.util import (
     wait_until_task_is_active,
@@ -14,11 +14,11 @@ from modules.modes.util import (
     wait_for_no_script_to_run,
     wait_for_player_avatar_to_be_controllable,
 )
-from modules.player import get_player_avatar, player_avatar_is_controllable
-from modules.pokemon import Pokemon
-from modules.pokemon_party import get_party, get_party_size
-from modules.pokemon_storage import get_pokemon_storage
-from modules.tasks import get_task
+from modules.player.player import get_player_avatar, player_avatar_is_controllable
+from modules.pokemon.pokemon import Pokemon
+from modules.pokemon.pokemon_party import get_party, get_party_size
+from modules.pokemon.pokemon_storage import get_pokemon_storage
+from modules.core.tasks import get_task
 
 
 class PCStorageSection(Enum):

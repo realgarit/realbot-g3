@@ -2,12 +2,12 @@
 from collections.abc import Callable
 from typing import Optional, Literal
 
-from modules.battle_strategies import BattleStrategy, DefaultBattleStrategy
-from modules.context import context
-from modules.debug import debug
-from modules.encounter import handle_encounter
-from modules.map import get_map_data_for_current_position, get_effective_encounter_rates_for_current_map
-from modules.map_data import MapFRLG, get_map_enum
+from modules.battle.battle_strategies import BattleStrategy, DefaultBattleStrategy
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.pokemon.encounter import handle_encounter
+from modules.map.map import get_map_data_for_current_position, get_effective_encounter_rates_for_current_map
+from modules.map.map_data import MapFRLG, get_map_enum
 from modules.modes import BotModeError, BattleAction
 from modules.modes.util import (
     apply_white_flute_if_available,
@@ -17,8 +17,8 @@ from modules.modes.util import (
     spin,
     fish,
 )
-from modules.player import get_player_location
-from modules.pokemon_party import get_party
+from modules.player.player import get_player_location
+from modules.pokemon.pokemon_party import get_party
 
 
 class PokecenterLoopController:

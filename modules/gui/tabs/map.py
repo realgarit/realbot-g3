@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 
 from PIL import ImageTk
 
-from modules.context import context
+from modules.core.context import context
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview, MapViewer
-from modules.map import (
+from modules.map.map import (
     EffectiveWildEncounter,
     WildEncounter,
     get_effective_encounter_rates_for_current_map,
@@ -17,13 +17,13 @@ from modules.map import (
     get_map_objects,
     get_wild_encounters_for_map,
 )
-from modules.map_data import MapFRLG, MapGroupFRLG, MapGroupRSE, MapRSE, get_map_enum
-from modules.map_path import Direction, _find_tile_by_local_coordinates
-from modules.memory import game_has_started
-from modules.player import TileTransitionState, get_player_avatar
+from modules.map.map_data import MapFRLG, MapGroupFRLG, MapGroupRSE, MapRSE, get_map_enum
+from modules.map.map_path import Direction, _find_tile_by_local_coordinates
+from modules.game.memory import game_has_started
+from modules.player.player import TileTransitionState, get_player_avatar
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class MapTab(DebugTab):

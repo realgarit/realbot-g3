@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.debug import debug
+from modules.core.debug import debug
 
 
 @debug.track

@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
-from modules.console import console
-from modules.main import work_queue
-from modules.state_cache import StateCacheItem
+from modules.core.console import console
+from modules.core.main import work_queue
+from modules.core.state_cache import StateCacheItem
 
 custom_state: dict = {}
 

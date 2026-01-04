@@ -2,14 +2,14 @@
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.context import context
-from modules.game import _event_flags
+from modules.core.context import context
+from modules.game.game import _event_flags
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.memory import get_event_flag, set_event_flag
+from modules.game.memory import get_event_flag, set_event_flag
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class EventFlagsTab(DebugTab):

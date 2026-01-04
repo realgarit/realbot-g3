@@ -3,7 +3,7 @@ from datetime import date, datetime
 from tkinter import Tk, ttk, StringVar
 from typing import Union
 
-from modules.profiles import Profile, list_available_profiles
+from modules.core.profiles import Profile, list_available_profiles
 
 
 class SelectProfileScreen:

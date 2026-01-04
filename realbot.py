@@ -8,8 +8,8 @@ import pathlib
 import platform
 from dataclasses import dataclass
 
-from modules.runtime import is_bundled_app, get_base_path
-from modules.version import realbot_name, realbot_version
+from modules.core.runtime import is_bundled_app, get_base_path
+from modules.core.version import realbot_name, realbot_version
 
 OS_NAME = platform.system()
 gui = None
@@ -58,7 +58,7 @@ def directory_arg(value: str) -> pathlib.Path:
     """
     path_obj = pathlib.Path(value)
     if not path_obj.is_dir() or not path_obj.exists():
-        from modules import exceptions
+        from modules.core import exceptions
 
         raise exceptions.CriticalDirectoryMissing(value)
     return path_obj
@@ -117,13 +117,13 @@ if __name__ == "__main__":
         from requirements import check_requirements
 
         check_requirements()
-    from modules.context import context
-    from modules.console import console
-    from modules.exceptions_hook import register_exception_hook
-    from modules.main import main_loop
+    from modules.core.context import context
+    from modules.core.console import console
+    from modules.core.exceptions_hook import register_exception_hook
+    from modules.core.main import main_loop
     from modules.modes import get_bot_mode_names
-    from modules.plugins import load_plugins
-    from modules.profiles import Profile, profile_directory_exists, load_profile_by_name
+    from modules.core.plugins import load_plugins
+    from modules.core.profiles import Profile, profile_directory_exists, load_profile_by_name
     from updater import run_updater
 
     register_exception_hook()

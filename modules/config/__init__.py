@@ -6,9 +6,9 @@ from pathlib import Path
 from confz import BaseConfig, FileSource
 from ruamel.yaml import YAML
 
-from modules import exceptions
+from modules.core import exceptions
 from modules.config.schemas_v1 import Battle, CatchBlock, Cheats, Discord, OBS, Keys, Logging, HTTP, ProfileMetadata
-from modules.runtime import get_base_path
+from modules.core.runtime import get_base_path
 
 # Defines which class attributes of the Config class are meant to hold required configuration data.
 CONFIG_ATTRS = {

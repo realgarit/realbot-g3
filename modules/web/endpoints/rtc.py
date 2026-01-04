@@ -7,7 +7,7 @@ from typing import Union
 
 from aiohttp import web
 
-from modules.context import context
+from modules.core.context import context
 
 try:
     from aiortc import MediaStreamTrack, VideoStreamTrack, RTCPeerConnection, RTCSessionDescription

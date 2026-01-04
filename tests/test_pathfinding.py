@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
-from modules.map_data import MapRSE, MapFRLG
+from modules.map.map_data import MapRSE, MapFRLG
 from modules.modes.util import navigate_to
-from modules.player import get_player_location
+from modules.player.player import get_player_location
 from tests.utility import BotTestCase, with_save_state, with_frame_timeout
 
 
@@ -15,9 +15,9 @@ class TestPathfinding(BotTestCase):
     )
     @with_frame_timeout(1000)
     def test_basic_pathfinding(self):
-        from modules.map_data import MapRSE, MapFRLG
+        from modules.map.map_data import MapRSE, MapFRLG
         from modules.modes.util import navigate_to
-        from modules.player import get_player_location, player_avatar_is_controllable, player_avatar_is_standing_still
+        from modules.player.player import get_player_location, player_avatar_is_controllable, player_avatar_is_standing_still
 
         if self.rom.is_rse:
             destination = MapRSE.LITTLEROOT_TOWN_MAYS_HOUSE_1F, (9, 4)
@@ -38,9 +38,9 @@ class TestPathfinding(BotTestCase):
     )
     @with_frame_timeout(1000)
     def test_will_follow_warps(self):
-        from modules.map_data import MapRSE, MapFRLG
+        from modules.map.map_data import MapRSE, MapFRLG
         from modules.modes.util import navigate_to
-        from modules.player import get_player_location, player_avatar_is_controllable, player_avatar_is_standing_still
+        from modules.player.player import get_player_location, player_avatar_is_controllable, player_avatar_is_standing_still
 
         if self.rom.is_rse:
             warp_tile = MapRSE.LITTLEROOT_TOWN_MAYS_HOUSE_1F, (2, 2)
@@ -63,7 +63,7 @@ class TestPathfinding(BotTestCase):
     )
     @with_frame_timeout(1000)
     def test_will_raise_exception_for_blocked_tile(self):
-        from modules.map_data import MapRSE, MapFRLG
+        from modules.map.map_data import MapRSE, MapFRLG
         from modules.modes import BotModeError
         from modules.modes.util import navigate_to
 
@@ -84,9 +84,9 @@ class TestPathfinding(BotTestCase):
     )
     @with_frame_timeout(1000)
     def test_will_move_across_connected_maps(self):
-        from modules.map_data import MapRSE, MapFRLG
+        from modules.map.map_data import MapRSE, MapFRLG
         from modules.modes.util import navigate_to
-        from modules.player import get_player_location
+        from modules.player.player import get_player_location
 
         if self.rom.is_rse:
             destination = MapRSE.ROUTE101, (10, 11)
@@ -98,16 +98,16 @@ class TestPathfinding(BotTestCase):
 
     @with_save_state("emerald/water_currents.ss1")
     def test_rse_water_currents(self):
-        from modules.map_data import MapRSE
+        from modules.map.map_data import MapRSE
         from modules.modes.util import navigate_to
-        from modules.player import get_player_location
+        from modules.player.player import get_player_location
 
         yield from navigate_to(MapRSE.ROUTE134, (61, 31))
         self.assertEqual(get_player_location(), (MapRSE.ROUTE134, (61, 31)))
 
     @with_save_state("emerald/diving.ss1")
     def test_rse_diving(self):
-        from modules.map import get_map_data_for_current_position
+        from modules.map.map import get_map_data_for_current_position
         from modules.modes.util import dive, surface_from_dive
 
         yield from dive()

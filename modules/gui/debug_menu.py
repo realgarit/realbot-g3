@@ -7,10 +7,10 @@ from tkinter import Tk, Menu, filedialog
 
 import PIL.PngImagePlugin
 
-from modules.battle_state import battle_is_active
-from modules.clock import get_clock_time
-from modules.context import context
-from modules.debug_utilities import (
+from modules.battle.battle_state import battle_is_active
+from modules.game.clock import get_clock_time
+from modules.core.context import context
+from modules.debug.debug_utilities import (
     debug_give_test_item_pack,
     debug_give_max_coins_and_money,
     import_flags_and_vars,
@@ -24,7 +24,7 @@ from modules.gui.debug_edit_item_bag import run_edit_item_bag_screen
 from modules.gui.debug_edit_party import run_edit_party_screen
 from modules.gui.debug_edit_pokedex import run_edit_pokedex_screen
 from modules.gui.multi_select_window import ask_for_confirmation, ask_for_choice, Selection
-from modules.memory import (
+from modules.game.memory import (
     write_symbol,
     pack_uint16,
     pack_uint8,
@@ -34,10 +34,10 @@ from modules.memory import (
     read_symbol,
 )
 from modules.modes import BotListener, BotMode, FrameInfo
-from modules.player import get_player
-from modules.pokemon import get_opponent
-from modules.pokemon_party import get_party, get_party_size
-from modules.runtime import get_sprites_path, get_base_path
+from modules.player.player import get_player
+from modules.pokemon.pokemon import get_opponent
+from modules.pokemon.pokemon_party import get_party, get_party_size
+from modules.core.runtime import get_sprites_path, get_base_path
 
 
 def _create_save_state() -> None:

@@ -6,7 +6,7 @@ from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class EmulatorTab(DebugTab):
@@ -23,7 +23,7 @@ class EmulatorTab(DebugTab):
         self._tv.update_data(self._get_data(emulator))
 
     def _get_data(self, emulator: "LibmgbaEmulator"):
-        from modules.libmgba import AudioBufInfo, VideoBufInfo
+        from modules.game.libmgba import AudioBufInfo, VideoBufInfo
 
         core = emulator._core
 

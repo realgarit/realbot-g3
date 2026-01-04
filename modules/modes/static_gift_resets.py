@@ -1,16 +1,16 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.console import console
-from modules.context import context
-from modules.encounter import handle_encounter, EncounterInfo
-from modules.map import get_map_data
-from modules.map_data import MapFRLG, MapRSE
-from modules.map_path import calculate_path
-from modules.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
-from modules.player import get_player_avatar
-from modules.pokemon_party import get_party, get_party_size
-from modules.save_data import get_save_data
+from modules.core.console import console
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
+from modules.map.map import get_map_data
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.map.map_path import calculate_path
+from modules.menus.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon_party import get_party, get_party_size
+from modules.game.save_data import get_save_data
 from ._asserts import (
     assert_save_game_exists,
     assert_registered_item,

@@ -4,10 +4,10 @@ from tkinter import *
 
 from rich.prompt import IntPrompt
 
-from modules.context import context
-from modules.pokemon import Pokemon
-from modules.pokemon import StatsValues
-from modules.pokemon_party import get_party
+from modules.core.context import context
+from modules.pokemon.pokemon import Pokemon
+from modules.pokemon.pokemon import StatsValues
+from modules.pokemon.pokemon_party import get_party
 
 
 def ask_for_ev_targets(pokemon: "Pokemon") -> StatsValues:

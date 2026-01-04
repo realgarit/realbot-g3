@@ -1,17 +1,17 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.console import console
-from modules.context import context
-from modules.daycare import DaycareCompatibility, get_daycare_data
-from modules.encounter import judge_encounter, EncounterInfo
-from modules.items import get_item_bag, get_item_by_name, get_item_storage
-from modules.map_data import MapFRLG, MapRSE
-from modules.map_path import calculate_path
-from modules.memory import GameState, get_event_flag, get_game_state
-from modules.player import get_player_avatar, get_player_location
-from modules.pokemon_party import get_party, get_party_size
-from modules.tasks import get_global_script_context
+from modules.core.console import console
+from modules.core.context import context
+from modules.pokemon.daycare import DaycareCompatibility, get_daycare_data
+from modules.pokemon.encounter import judge_encounter, EncounterInfo
+from modules.items.items import get_item_bag, get_item_by_name, get_item_storage
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.map.map_path import calculate_path
+from modules.game.memory import GameState, get_event_flag, get_game_state
+from modules.player.player import get_player_avatar, get_player_location
+from modules.pokemon.pokemon_party import get_party, get_party_size
+from modules.core.tasks import get_global_script_context
 from ._interface import BotMode, BotModeError
 from .util import (
     ensure_facing_direction,

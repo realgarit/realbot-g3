@@ -1,16 +1,16 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.encounter import handle_encounter, EncounterInfo
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
 from modules.gui.multi_select_window import Selection, ask_for_choice
-from modules.map_data import MapFRLG
-from modules.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
-from modules.player import get_player_avatar
-from modules.pokemon_party import get_party, get_party_size
-from modules.runtime import get_sprites_path
-from modules.save_data import get_save_data
-from modules.tasks import task_is_active
+from modules.map.map_data import MapFRLG
+from modules.menus.menuing import PokemonPartyMenuNavigator, StartMenuNavigator
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon_party import get_party, get_party_size
+from modules.core.runtime import get_sprites_path
+from modules.game.save_data import get_save_data
+from modules.core.tasks import task_is_active
 from ._asserts import SavedMapLocation, assert_save_game_exists, assert_saved_on_map, assert_empty_slot_in_party
 from ._interface import BotMode, BotModeError
 from .util import (

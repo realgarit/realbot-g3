@@ -1,16 +1,16 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.debug import debug
-from modules.map import get_map_objects
-from modules.map_data import MapFRLG, MapRSE
-from modules.memory import get_event_flag, get_event_var
-from modules.menuing import use_field_move
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.map.map import get_map_objects
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.game.memory import get_event_flag, get_event_var
+from modules.menus.menuing import use_field_move
 from modules.modes.util.higher_level_actions import dive, surface_from_dive
-from modules.player import get_player_avatar
-from modules.pokemon_party import get_party_size
-from modules.tasks import get_global_script_context
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon_party import get_party_size
+from modules.core.tasks import get_global_script_context
 from . import BattleAction
 from ._asserts import (
     assert_has_pokemon_with_any_move,

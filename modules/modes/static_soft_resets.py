@@ -2,11 +2,11 @@
 from dataclasses import dataclass
 from typing import Generator, Optional
 
-from modules.context import context
-from modules.encounter import handle_encounter, log_encounter, EncounterInfo
-from modules.map_data import MapFRLG, MapRSE
-from modules.player import get_player_avatar
-from modules.save_data import get_save_data
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, log_encounter, EncounterInfo
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.player.player import get_player_avatar
+from modules.game.save_data import get_save_data
 from ._asserts import (
     SavedMapLocation,
     assert_save_game_exists,

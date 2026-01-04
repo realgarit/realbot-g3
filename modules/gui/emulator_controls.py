@@ -7,14 +7,14 @@ from typing import Union
 
 from showinfm import show_in_file_manager
 
-from modules.console import console
-from modules.context import context
+from modules.core.console import console
+from modules.core.context import context
 from modules.gui.debug_menu import DebugMenu
 from modules.gui.multi_select_window import ask_for_confirmation
-from modules.libmgba import LibmgbaEmulator
-from modules.memory import GameState, get_game_state
+from modules.game.libmgba import LibmgbaEmulator
+from modules.game.memory import GameState, get_game_state
 from modules.modes import get_bot_modes
-from modules.version import realbot_name, realbot_version
+from modules.core.version import realbot_name, realbot_version
 
 
 class EmulatorControls:

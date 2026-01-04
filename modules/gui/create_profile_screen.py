@@ -5,11 +5,11 @@ from typing import Union
 
 from PIL import Image, ImageOps, ImageTk
 
-from modules.profiles import create_profile, list_available_profiles, profile_directory_exists
-from modules.roms import ROM, list_available_roms
-from modules.runtime import get_sprites_path
-from modules.save_import import MigrationError, migrate_save_state
-from modules.version import realbot_name
+from modules.core.profiles import create_profile, list_available_profiles, profile_directory_exists
+from modules.game.roms import ROM, list_available_roms
+from modules.core.runtime import get_sprites_path
+from modules.game.save_import import MigrationError, migrate_save_state
+from modules.core.version import realbot_name
 
 
 class CreateProfileScreen:

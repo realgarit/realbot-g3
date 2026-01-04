@@ -8,8 +8,8 @@ from typing import IO, BinaryIO
 
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
-from modules.game import set_rom, decode_string, get_symbol, get_symbol_name_before
-from modules.roms import list_available_roms, ROMLanguage, ROM
+from modules.game.game import set_rom, decode_string, get_symbol, get_symbol_name_before
+from modules.game.roms import list_available_roms, ROMLanguage, ROM
 
 
 def find_roms() -> tuple[ROM, dict[str, ROM], dict[str, ROM]]:

@@ -9,10 +9,10 @@ from enum import Enum, auto
 from typing import Generator, Optional, TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from modules.battle_state import BattleOutcome
-    from modules.encounter import EncounterInfo
-    from modules.memory import GameState
-    from modules.pokemon import Pokemon
+    from modules.battle.battle_state import BattleOutcome
+    from modules.pokemon.encounter import EncounterInfo
+    from modules.game.memory import GameState
+    from modules.pokemon.pokemon import Pokemon
 
 
 class BattleAction(Enum):

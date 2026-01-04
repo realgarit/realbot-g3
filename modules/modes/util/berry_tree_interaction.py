@@ -1,18 +1,18 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.berry_trees import get_berry_tree_by_id, BerryTreeStage
-from modules.context import context
-from modules.items import Item, ItemPocket, get_item_bag, get_item_by_name
-from modules.memory import get_game_state, GameState
-from modules.menuing import is_fade_active, scroll_to_item_in_bag
+from modules.items.berry_trees import get_berry_tree_by_id, BerryTreeStage
+from modules.core.context import context
+from modules.items.items import Item, ItemPocket, get_item_bag, get_item_by_name
+from modules.game.memory import get_game_state, GameState
+from modules.menus.menuing import is_fade_active, scroll_to_item_in_bag
 from modules.modes._interface import BotModeError
 from modules.modes.util import (
     wait_for_player_avatar_to_be_controllable,
     wait_for_no_script_to_run,
 )
-from modules.player import player_avatar_is_controllable, get_player_avatar
-from modules.tasks import get_global_script_context
+from modules.player.player import player_avatar_is_controllable, get_player_avatar
+from modules.core.tasks import get_global_script_context
 
 
 def plant_berry(berry: Item) -> Generator:

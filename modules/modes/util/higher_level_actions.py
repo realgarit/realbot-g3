@@ -2,14 +2,14 @@
 from enum import Enum
 from typing import Generator, Union, Callable
 
-from modules.context import context
-from modules.debug import debug
-from modules.map_data import PokemonCenter
-from modules.memory import get_event_flag, get_game_state_symbol, unpack_uint32, read_symbol, get_game_state, GameState
-from modules.menu_parsers import CursorOptionEmerald, CursorOptionFRLG, CursorOptionRS
-from modules.menuing import PokemonPartyMenuNavigator, StartMenuNavigator, is_fade_active
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.map.map_data import PokemonCenter
+from modules.game.memory import get_event_flag, get_game_state_symbol, unpack_uint32, read_symbol, get_game_state, GameState
+from modules.menus.menu_parsers import CursorOptionEmerald, CursorOptionFRLG, CursorOptionRS
+from modules.menus.menuing import PokemonPartyMenuNavigator, StartMenuNavigator, is_fade_active
 from modules.modes.util.sleep import wait_for_n_frames
-from modules.player import (
+from modules.player.player import (
     get_player_avatar,
     get_player,
     TileTransitionState,
@@ -17,9 +17,9 @@ from modules.player import (
     player_avatar_is_standing_still,
     AvatarFlags,
 )
-from modules.pokemon_party import get_party
-from modules.region_map import FlyDestinationFRLG, FlyDestinationRSE, get_map_cursor, get_map_region
-from modules.tasks import get_task, task_is_active
+from modules.pokemon.pokemon_party import get_party
+from modules.map.region_map import FlyDestinationFRLG, FlyDestinationRSE, get_map_cursor, get_map_region
+from modules.core.tasks import get_task, task_is_active
 from ._util_helper import isolate_inputs
 from .items import scroll_to_item_in_bag, use_item_from_bag
 from .tasks_scripts import (
@@ -38,12 +38,12 @@ from .walking import (
     wait_for_player_avatar_to_be_controllable,
 )
 from .._interface import BotModeError
-from ...game import get_symbol_name_before
-from ...items import Item, get_item_bag, ItemPocket, Pokeblock, get_pokeblocks
-from ...map import get_map_objects, get_map_data_for_current_position
-from ...map_path import calculate_path, PathFindingError, Direction
-from ...mart import get_mart_buyable_items, get_mart_buy_menu_scroll_position, get_mart_main_menu_scroll_position
-from ...pokeblock_feeder import get_active_pokeblock_feeder_for_location
+from modules.game.game import get_symbol_name_before
+from modules.items.items import Item, get_item_bag, ItemPocket, Pokeblock, get_pokeblocks
+from modules.map.map import get_map_objects, get_map_data_for_current_position
+from modules.map.map_path import calculate_path, PathFindingError, Direction
+from modules.items.mart import get_mart_buyable_items, get_mart_buy_menu_scroll_position, get_mart_main_menu_scroll_position
+from modules.items.pokeblock_feeder import get_active_pokeblock_feeder_for_location
 
 
 @isolate_inputs

@@ -4,10 +4,10 @@ from pathlib import Path
 from notifypy import Notify
 from notifypy.exceptions import UnsupportedPlatform
 
-from modules.console import console
-from modules.context import context
-from modules.runtime import get_data_path
-from modules.version import realbot_name, realbot_version
+from modules.core.console import console
+from modules.core.context import context
+from modules.core.runtime import get_data_path
+from modules.core.version import realbot_name, realbot_version
 
 
 def desktop_notification(title: str, message: str, icon: Path = None) -> None:

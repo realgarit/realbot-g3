@@ -15,8 +15,8 @@ except ImportError:
 
 from modules.gui.debug_tabs import *
 from modules.gui.emulator_controls import DebugEmulatorControls, EmulatorControls
-from modules.sprites import generate_placeholder_image
-from modules.version import realbot_name, realbot_version
+from modules.game.sprites import generate_placeholder_image
+from modules.core.version import realbot_name, realbot_version
 
 
 # Defines how many frames can be reverted at the most in stepping mode.

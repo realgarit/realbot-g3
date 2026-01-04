@@ -8,17 +8,17 @@ from queue import Queue, Empty, Full
 from threading import Thread
 from time import sleep, time
 
-from modules.console import console
-from modules.context import context
-from modules.libmgba import inputs_to_strings
-from modules.main import work_queue, inputs_each_frame
-from modules.map import get_effective_encounter_rates_for_current_map
-from modules.memory import GameState, get_game_state
-from modules.player import get_player, get_player_avatar
-from modules.pokedex import get_pokedex
-from modules.pokemon import get_opponent
-from modules.pokemon_party import get_party
-from modules.state_cache import state_cache
+from modules.core.console import console
+from modules.core.context import context
+from modules.game.libmgba import inputs_to_strings
+from modules.core.main import work_queue, inputs_each_frame
+from modules.map.map import get_effective_encounter_rates_for_current_map
+from modules.game.memory import GameState, get_game_state
+from modules.player.player import get_player, get_player_avatar
+from modules.pokemon.pokedex import get_pokedex
+from modules.pokemon.pokemon import get_opponent
+from modules.pokemon.pokemon_party import get_party
+from modules.core.state_cache import state_cache
 
 update_interval_in_ms = 1000 / 60
 queue_size = 10

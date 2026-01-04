@@ -2,16 +2,16 @@
 from typing import Generator, Tuple
 from collections import Counter
 
-from modules.context import context
-from modules.battle_state import BattleOutcome
-from modules.map_data import MapFRLG, MapRSE, is_safari_map
-from modules.player import get_player, get_player_avatar, TileTransitionState, AvatarFlags
-from modules.pokemon_party import get_party
-from modules.pokemon import get_species_by_name, get_opponent
-from modules.memory import get_event_flag
-from modules.menuing import StartMenuNavigator
+from modules.core.context import context
+from modules.battle.battle_state import BattleOutcome
+from modules.map.map_data import MapFRLG, MapRSE, is_safari_map
+from modules.player.player import get_player, get_player_avatar, TileTransitionState, AvatarFlags
+from modules.pokemon.pokemon_party import get_party
+from modules.pokemon.pokemon import get_species_by_name, get_opponent
+from modules.game.memory import get_event_flag
+from modules.menus.menuing import StartMenuNavigator
 from modules.modes.util.walking import wait_for_player_avatar_to_be_controllable
-from modules.items import get_item_by_name, get_pokeblocks
+from modules.items.items import get_item_by_name, get_pokeblocks
 from modules.modes.util.higher_level_actions import unmount_bicycle, put_pokeblock_in_feeder
 from modules.safari_strategy import (
     SafariPokemon,
@@ -26,8 +26,8 @@ from modules.safari_strategy import (
     get_pokeblock_type_counts,
     get_lowest_feel_pokeblock_by_type,
 )
-from modules.runtime import get_sprites_path
-from modules.sprites import get_regular_sprite
+from modules.core.runtime import get_sprites_path
+from modules.game.sprites import get_regular_sprite
 from modules.gui.multi_select_window import Selection, ask_for_choice_scroll, ask_for_choice
 from ._interface import BotMode, BotModeError
 from ._asserts import (

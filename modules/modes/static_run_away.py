@@ -1,12 +1,12 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.encounter import handle_encounter, EncounterInfo
-from modules.map import get_map_objects
-from modules.map_data import MapFRLG, MapRSE
-from modules.memory import get_event_flag
-from modules.player import get_player_avatar
+from modules.core.context import context
+from modules.pokemon.encounter import handle_encounter, EncounterInfo
+from modules.map.map import get_map_objects
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.game.memory import get_event_flag
+from modules.player.player import get_player_avatar
 from ._asserts import assert_player_has_poke_balls, assert_boxes_or_party_can_fit_pokemon
 from ._interface import BattleAction, BotMode, BotModeError
 from .util import (

@@ -14,16 +14,16 @@ from typing import TYPE_CHECKING, Generator
 import obsws_python as obs
 from datetime import datetime
 
-from modules.console import console
-from modules.context import context
+from modules.core.console import console
+from modules.core.context import context
 from modules.discord import discord_send, DiscordMessage
-from modules.files import make_string_safe_for_file_name
+from modules.core.files import make_string_safe_for_file_name
 from modules.modes.util import wait_for_n_frames
-from modules.plugin_interface import BotPlugin
+from modules.core.plugin_interface import BotPlugin
 
 if TYPE_CHECKING:
-    from modules.encounter import EncounterInfo
-    from modules.profiles import Profile
+    from modules.pokemon.encounter import EncounterInfo
+    from modules.core.profiles import Profile
 
 
 def _obs_screenshot(client: obs.ReqClient, width: int, height: int) -> Path:

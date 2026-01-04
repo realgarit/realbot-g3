@@ -22,7 +22,7 @@ this_dir = Path(__file__).parent
 
 with open(this_dir.parent / "map_data.py", "w") as out:
     out.write("from enum import Enum\n\n")
-    out.write("from modules.map import MapLocation\n\n")
+    out.write("from modules.map.map import MapLocation\n\n")
     out.write(
         """
 def _might_be_map_coordinates(value) -> bool:

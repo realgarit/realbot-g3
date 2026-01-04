@@ -2,10 +2,10 @@
 import random
 from typing import Generator
 
-from modules.context import context
-from modules.debug import debug
-from modules.files import get_rng_state_history, save_rng_state_history
-from modules.memory import GameState, get_game_state, pack_uint32, read_symbol, unpack_uint32, write_symbol
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.core.files import get_rng_state_history, save_rng_state_history
+from modules.game.memory import GameState, get_game_state, pack_uint32, read_symbol, unpack_uint32, write_symbol
 from .tasks_scripts import wait_for_task_to_start_and_finish
 from .walking import wait_for_player_avatar_to_be_controllable
 

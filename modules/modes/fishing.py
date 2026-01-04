@@ -1,11 +1,11 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.battle_state import BattleOutcome
+from modules.battle.battle_state import BattleOutcome
 from modules.gui.multi_select_window import Selection, ask_for_choice
-from modules.items import get_item_bag, get_item_by_name
-from modules.player import get_player, get_player_avatar
-from modules.runtime import get_sprites_path
+from modules.items.items import get_item_bag, get_item_by_name
+from modules.player.player import get_player, get_player_avatar
+from modules.core.runtime import get_sprites_path
 from ._asserts import assert_item_exists_in_bag, assert_player_has_poke_balls, assert_boxes_or_party_can_fit_pokemon
 from ._interface import BotMode
 from .util import fish, register_key_item

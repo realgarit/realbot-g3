@@ -1,19 +1,19 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.battle_evolution_scene import handle_evolution_scene
-from modules.battle_move_replacing import handle_move_replacement_dialogue
-from modules.battle_strategies import DefaultBattleStrategy, BattleStrategy
-from modules.context import context
-from modules.debug import debug
-from modules.items import Item, ItemPocket, get_item_bag, get_item_by_name, get_item_by_move_id
-from modules.memory import GameState, get_event_flag, get_game_state, read_symbol, unpack_uint16, get_event_var
-from modules.menuing import StartMenuNavigator, scroll_to_item_in_bag as real_scroll_to_item, is_fade_active
+from modules.pokemon.battle_evolution_scene import handle_evolution_scene
+from modules.battle.battle_move_replacing import handle_move_replacement_dialogue
+from modules.battle.battle_strategies import DefaultBattleStrategy, BattleStrategy
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.items.items import Item, ItemPocket, get_item_bag, get_item_by_name, get_item_by_move_id
+from modules.game.memory import GameState, get_event_flag, get_game_state, read_symbol, unpack_uint16, get_event_var
+from modules.menus.menuing import StartMenuNavigator, scroll_to_item_in_bag as real_scroll_to_item, is_fade_active
 from modules.modes._interface import BotModeError
-from modules.player import get_player
-from modules.pokemon import LearnedMove
-from modules.pokemon_party import get_party, get_party_size, PartyPokemon
-from modules.tasks import task_is_active
+from modules.player.player import get_player
+from modules.pokemon.pokemon import LearnedMove
+from modules.pokemon.pokemon_party import get_party, get_party_size, PartyPokemon
+from modules.core.tasks import task_is_active
 from ._util_helper import isolate_inputs
 from .sleep import wait_for_n_frames
 from .tasks_scripts import wait_for_task_to_start_and_finish, wait_until_task_is_active

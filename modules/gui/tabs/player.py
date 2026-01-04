@@ -2,19 +2,19 @@
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.context import context
-from modules.game_stats import GameStat, get_game_stat
+from modules.core.context import context
+from modules.game.game_stats import GameStat, get_game_stat
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.items import get_item_bag, get_item_storage, get_pokeblocks
-from modules.memory import game_has_started
-from modules.player import AvatarFlags, get_player, get_player_avatar
-from modules.pokedex import get_pokedex
-from modules.pokemon_party import get_party
-from modules.pokemon_storage import get_pokemon_storage
+from modules.items.items import get_item_bag, get_item_storage, get_pokeblocks
+from modules.game.memory import game_has_started
+from modules.player.player import AvatarFlags, get_player, get_player_avatar
+from modules.pokemon.pokedex import get_pokedex
+from modules.pokemon.pokemon_party import get_party
+from modules.pokemon.pokemon_storage import get_pokemon_storage
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class PlayerTab(DebugTab):

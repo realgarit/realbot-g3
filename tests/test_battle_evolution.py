@@ -13,10 +13,10 @@ class TestBattleEvolution(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_stops_evolution(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(stop_evolution=True)
 
@@ -39,10 +39,10 @@ class TestBattleEvolution(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_allows_evolution(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(stop_evolution=False)
 
@@ -72,10 +72,10 @@ class TestBattleEvolution(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_stops_evolution_with_new_move(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(stop_evolution=True, new_move="learn_best")
 
@@ -101,10 +101,10 @@ class TestBattleEvolution(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_allows_evolution_with_new_move(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(stop_evolution=False, new_move="learn_best")
 

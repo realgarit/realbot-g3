@@ -41,7 +41,7 @@ class TestStarter(BotTestCase):
     )
     @with_frame_timeout(10000)
     def test_it_stops_when_encountering_shiny(self):
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.starters import StartersMode
 

@@ -11,15 +11,15 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 sys.path.append(str(Path(__file__).parent.parent))
 
-from modules.console import console
-from modules.files import make_string_safe_for_file_name
-from modules.game import set_rom
-from modules.map_data import MapRSE, MapFRLG
+from modules.core.console import console
+from modules.core.files import make_string_safe_for_file_name
+from modules.game.game import set_rom
+from modules.map.map_data import MapRSE, MapFRLG
 from modules.modes import get_bot_mode_names
-from modules.profiles import load_profile_by_name
-from modules.runtime import get_base_path
-from modules.stats import StatsDatabase
-from modules.version import realbot_name, realbot_version
+from modules.core.profiles import load_profile_by_name
+from modules.core.runtime import get_base_path
+from modules.stats.stats import StatsDatabase
+from modules.core.version import realbot_name, realbot_version
 
 
 def fail(error_message: str, exit_code: int = 1, extra_content: str | None = None) -> Never:

@@ -1,12 +1,12 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.daycare import get_daycare_data
-from modules.memory import GameState
-from modules.pokedex import get_pokedex
-from modules.pokemon_party import get_party
-from modules.pokemon_storage import get_pokemon_storage
-from modules.state_cache import state_cache
+from modules.pokemon.daycare import get_daycare_data
+from modules.game.memory import GameState
+from modules.pokemon.pokedex import get_pokedex
+from modules.pokemon.pokemon_party import get_party
+from modules.pokemon.pokemon_storage import get_pokemon_storage
+from modules.core.state_cache import state_cache
 from modules.web.state import _update_via_work_queue
 
 route = web.RouteTableDef()

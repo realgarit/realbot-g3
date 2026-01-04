@@ -1,7 +1,7 @@
 # Copyright (c) 2026 realgarit
 from functools import wraps
 
-from modules.context import context
+from modules.core.context import context
 
 
 def isolate_inputs(generator_function):

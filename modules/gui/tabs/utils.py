@@ -7,7 +7,7 @@ from typing import Optional
 
 from PIL import Image, ImageDraw, ImageTk, ImageOps
 
-from modules.map import (
+from modules.map.map import (
     get_map_data_for_current_position,
     get_map_all_tiles,
 )

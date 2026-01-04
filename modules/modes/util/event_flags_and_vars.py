@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.debug import debug
-from modules.memory import get_event_flag, get_event_var
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.game.memory import get_event_flag, get_event_var
 
 
 @debug.track

@@ -1,8 +1,8 @@
 # Copyright (c) 2026 realgarit
-from modules.console import console
-from modules.files import save_pk3
-from modules.pokedex import get_pokedex
-from modules.pokemon import Pokemon
+from modules.core.console import console
+from modules.core.files import save_pk3
+from modules.pokemon.pokedex import get_pokedex
+from modules.pokemon.pokemon import Pokemon
 
 # Any 1-time encounter Pokémon (starters/legendaries/gift Pokémon) in this exceptions list will not be checked
 exceptions = [

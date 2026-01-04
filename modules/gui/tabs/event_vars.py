@@ -4,14 +4,14 @@ import tkinter
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.context import context
-from modules.game import get_event_var_name
+from modules.core.context import context
+from modules.game.game import get_event_var_name
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.memory import get_event_var, set_event_var
+from modules.game.memory import get_event_var, set_event_var
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class EventVarsTab(DebugTab):

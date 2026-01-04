@@ -1,20 +1,20 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.encounter import EncounterValue, handle_encounter, log_encounter, EncounterInfo
+from modules.core.context import context
+from modules.pokemon.encounter import EncounterValue, handle_encounter, log_encounter, EncounterInfo
 from modules.gui.multi_select_window import Selection, ask_for_choice
-from modules.items import get_item_by_name
-from modules.map_data import MapFRLG, MapRSE
-from modules.memory import GameState, get_event_var, get_game_state
+from modules.items.items import get_item_by_name
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.game.memory import GameState, get_event_var, get_game_state
 from modules.modes.util.event_flags_and_vars import wait_until_event_flag_is_true
 from modules.modes.util.tasks_scripts import wait_for_script_to_start_and_finish
 from modules.modes.util.walking import wait_for_player_avatar_to_be_controllable
-from modules.player import get_player, get_player_avatar
-from modules.region_map import FlyDestinationFRLG, FlyDestinationRSE
-from modules.runtime import get_sprites_path
-from modules.save_data import get_save_data
-from modules.tasks import get_global_script_context
+from modules.player.player import get_player, get_player_avatar
+from modules.map.region_map import FlyDestinationFRLG, FlyDestinationRSE
+from modules.core.runtime import get_sprites_path
+from modules.game.save_data import get_save_data
+from modules.core.tasks import get_global_script_context
 from ._asserts import (
     SavedMapLocation,
     assert_save_game_exists,

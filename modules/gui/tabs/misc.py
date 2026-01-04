@@ -2,20 +2,20 @@
 from tkinter import ttk
 from typing import TYPE_CHECKING
 
-from modules.clock import get_clock_time, get_play_time
-from modules.context import context
-from modules.daycare import get_daycare_data
-from modules.fishing import get_feebas_tiles
+from modules.game.clock import get_clock_time, get_play_time
+from modules.core.context import context
+from modules.pokemon.daycare import get_daycare_data
+from modules.items.fishing import get_feebas_tiles
 from modules.gui.emulator_controls import DebugTab
 from modules.gui.tabs.utils import FancyTreeview
-from modules.memory import game_has_started, read_symbol
-from modules.menuing import is_fade_active
-from modules.region_map import get_map_cursor
-from modules.roamer import get_roamer, get_roamer_location_history
-from modules.text_printer import get_text_printer
+from modules.game.memory import game_has_started, read_symbol
+from modules.menus.menuing import is_fade_active
+from modules.map.region_map import get_map_cursor
+from modules.map.roamer import get_roamer, get_roamer_location_history
+from modules.game.text_printer import get_text_printer
 
 if TYPE_CHECKING:
-    from modules.libmgba import LibmgbaEmulator
+    from modules.game.libmgba import LibmgbaEmulator
 
 
 class MiscTab(DebugTab):

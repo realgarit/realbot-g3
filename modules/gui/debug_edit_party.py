@@ -3,10 +3,10 @@ import time
 import tkinter
 from tkinter import Tk, Toplevel, ttk
 
-from modules.context import context
-from modules.debug_utilities import debug_create_pokemon, debug_write_party
-from modules.items import get_item_by_index, get_item_by_name
-from modules.pokemon import (
+from modules.core.context import context
+from modules.debug.debug_utilities import debug_create_pokemon, debug_write_party
+from modules.items.items import get_item_by_index, get_item_by_name
+from modules.pokemon.pokemon import (
     Pokemon,
     get_species_by_national_dex,
     get_nature_by_index,
@@ -19,7 +19,7 @@ from modules.pokemon import (
     LearnedMove,
     ContestConditions,
 )
-from modules.pokemon_party import get_party
+from modules.pokemon.pokemon_party import get_party
 
 status_name_map = {
     "Healthy": StatusCondition.Healthy,

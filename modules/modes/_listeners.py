@@ -2,21 +2,21 @@
 from types import GeneratorType
 from typing import Iterable
 
-from modules.context import context
-from modules.debug import debug
-from modules.encounter import handle_encounter, EncounterInfo, log_encounter
-from modules.map import get_map_objects, get_map_data_for_current_position
-from modules.map_data import MapFRLG, MapRSE, is_safari_map
-from modules.memory import GameState, get_game_state, get_game_state_symbol, read_symbol, unpack_uint32, unpack_uint16
-from modules.menuing import CheckForPickup, MenuWrapper, should_check_for_pickup, RotatePokemon
-from modules.player import TileTransitionState, get_player_avatar, player_avatar_is_standing_still
-from modules.pokemon import StatusCondition, clear_opponent, get_opponent
-from modules.pokemon_party import get_party
-from modules.tasks import get_global_script_context, task_is_active, get_task
+from modules.core.context import context
+from modules.core.debug import debug
+from modules.pokemon.encounter import handle_encounter, EncounterInfo, log_encounter
+from modules.map.map import get_map_objects, get_map_data_for_current_position
+from modules.map.map_data import MapFRLG, MapRSE, is_safari_map
+from modules.game.memory import GameState, get_game_state, get_game_state_symbol, read_symbol, unpack_uint32, unpack_uint16
+from modules.menus.menuing import CheckForPickup, MenuWrapper, should_check_for_pickup, RotatePokemon
+from modules.player.player import TileTransitionState, get_player_avatar, player_avatar_is_standing_still
+from modules.pokemon.pokemon import StatusCondition, clear_opponent, get_opponent
+from modules.pokemon.pokemon_party import get_party
+from modules.core.tasks import get_global_script_context, task_is_active, get_task
 from ._interface import BattleAction, BotListener, BotMode, FrameInfo
 from .util import isolate_inputs, save_the_game, leave_safari_zone
-from ..battle_handler import handle_battle
-from ..battle_state import (
+from modules.battle.battle_handler import handle_battle
+from modules.battle.battle_state import (
     get_last_battle_outcome,
     BattleOutcome,
     get_encounter_type,
@@ -25,12 +25,12 @@ from ..battle_state import (
     BattleType,
     get_main_battle_callback,
 )
-from ..battle_strategies import DefaultBattleStrategy, BattleStrategy
-from ..battle_strategies.catch import CatchStrategy
-from ..battle_strategies.run_away import RunAwayStrategy
-from ..fishing import FishingAttempt, FishingRod, FishingResult
-from ..keyboard import handle_naming_screen
-from ..plugins import (
+from modules.battle.battle_strategies import DefaultBattleStrategy, BattleStrategy
+from modules.battle.battle_strategies.catch import CatchStrategy
+from modules.battle.battle_strategies.run_away import RunAwayStrategy
+from modules.items.fishing import FishingAttempt, FishingRod, FishingResult
+from modules.game.keyboard import handle_naming_screen
+from modules.core.plugins import (
     plugin_battle_started,
     plugin_battle_ended,
     plugin_whiteout,
@@ -39,7 +39,7 @@ from ..plugins import (
     plugin_egg_starting_to_hatch,
     plugin_should_nickname_pokemon,
 )
-from ..text_printer import get_text_printer, TextPrinterState
+from modules.game.text_printer import get_text_printer, TextPrinterState
 
 
 def _ensure_plugin_hook_will_run(generator: Iterable) -> None:

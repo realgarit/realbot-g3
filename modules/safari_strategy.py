@@ -5,19 +5,19 @@ from typing import Union, Tuple, Optional, Callable, List, Dict
 
 import yaml
 
-from modules.battle_strategies import SafariTurnAction
-from modules.context import context
-from modules.files import make_string_safe_for_file_name
-from modules.map_data import MapFRLG, MapRSE
-from modules.memory import read_symbol, get_event_flag
+from modules.battle.battle_strategies import SafariTurnAction
+from modules.core.context import context
+from modules.core.files import make_string_safe_for_file_name
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.game.memory import read_symbol, get_event_flag
 from modules.modes._interface import BotModeError
-from modules.player import get_player_avatar
-from modules.pokemon import Pokemon, Species, get_species_by_name, get_opponent
-from modules.pokemon_party import get_party
-from modules.roms import ROM
-from modules.runtime import get_data_path
-from modules.tasks import get_global_script_context
-from modules.items import Pokeblock, PokeblockType, get_pokeblocks
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon import Pokemon, Species, get_species_by_name, get_opponent
+from modules.pokemon.pokemon_party import get_party
+from modules.game.roms import ROM
+from modules.core.runtime import get_data_path
+from modules.core.tasks import get_global_script_context
+from modules.items.items import Pokeblock, PokeblockType, get_pokeblocks
 from collections import Counter
 
 

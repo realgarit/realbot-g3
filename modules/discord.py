@@ -11,10 +11,10 @@ from discord_webhook import DiscordEmbed, DiscordWebhook
 from pypresence import Presence
 from requests.exceptions import RequestException
 
-from modules.console import console
-from modules.context import context
-from modules.state_cache import state_cache
-from modules.version import realbot_version
+from modules.core.console import console
+from modules.core.context import context
+from modules.core.state_cache import state_cache
+from modules.core.version import realbot_version
 
 _event_loop: AbstractEventLoop | None = None
 _message_queue: Queue["DiscordMessage"] = Queue()

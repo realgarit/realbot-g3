@@ -2,10 +2,10 @@
 import struct
 from typing import Generator
 
-from modules.items import get_item_by_name, get_item_bag, get_pokeblocks
-from modules.player import get_player_avatar
-from modules.roms import ROMLanguage
-from modules.context import context
+from modules.items.items import get_item_by_name, get_item_bag, get_pokeblocks
+from modules.player.player import get_player_avatar
+from modules.game.roms import ROMLanguage
+from modules.core.context import context
 from . import BotModeError
 from ._interface import BotMode
 from .util import scroll_to_item_in_bag

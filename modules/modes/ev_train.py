@@ -3,13 +3,13 @@ from typing import Generator
 
 from rich.table import Table
 
-from modules.context import context
-from modules.map import get_map_data_for_current_position, get_effective_encounter_rates_for_current_map
-from modules.map_data import get_map_enum
+from modules.core.context import context
+from modules.map.map import get_map_data_for_current_position, get_effective_encounter_rates_for_current_map
+from modules.map.map_data import get_map_enum
 from modules.modes import BattleAction
-from modules.player import get_player_avatar
-from modules.pokemon import get_opponent, StatusCondition, StatsValues, Pokemon
-from modules.pokemon_party import get_party
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon import get_opponent, StatusCondition, StatsValues, Pokemon
+from modules.pokemon.pokemon_party import get_party
 from ._interface import BotMode, BotModeError
 from .util import navigate_to, heal_in_pokemon_center, spin
 from .util.map import map_has_pokemon_center_nearby, find_closest_pokemon_center

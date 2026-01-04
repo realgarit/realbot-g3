@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.items import get_item_bag
-from modules.player import get_player, get_player_avatar
-from modules.state_cache import state_cache
+from modules.items.items import get_item_bag
+from modules.player.player import get_player, get_player_avatar
+from modules.core.state_cache import state_cache
 from modules.web.state import _update_via_work_queue
 
 route = web.RouteTableDef()

@@ -4,10 +4,10 @@
 from typing import TYPE_CHECKING, Type
 
 from ._interface import BattleAction, BotListener, BotMode, BotModeError, FrameInfo
-from ..plugins import plugin_get_additional_bot_listeners, plugin_get_additional_bot_modes
+from modules.core.plugins import plugin_get_additional_bot_listeners, plugin_get_additional_bot_modes
 
 if TYPE_CHECKING:
-    from modules.roms import ROM
+    from modules.game.roms import ROM
 
 _bot_modes: list[Type[BotMode]] = []
 

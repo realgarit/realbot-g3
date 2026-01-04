@@ -14,7 +14,7 @@ class TestBattleMoveLearning(BotTestCase):
     def test_it_learns_move_with_empty_slot_available(self):
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         self.bot_mode.set_on_battle_started(lambda *args: BattleAction.Fight)
         previous_level = get_party()[0].level
@@ -33,10 +33,10 @@ class TestBattleMoveLearning(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_replaces_existing_move(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(new_move="learn_best")
 
@@ -56,10 +56,10 @@ class TestBattleMoveLearning(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_does_not_learn_new_move(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(new_move="cancel")
 
@@ -79,10 +79,10 @@ class TestBattleMoveLearning(BotTestCase):
     @with_frame_timeout(1500)
     def test_it_switches_to_manual_when_having_to_replace_new_move(self):
         from modules.config.schemas_v1 import Battle
-        from modules.context import context
+        from modules.core.context import context
         from modules.modes import BattleAction
         from modules.modes.util import spin
-        from modules.pokemon_party import get_party
+        from modules.pokemon.pokemon_party import get_party
 
         context.config.battle = Battle(new_move="stop")
 

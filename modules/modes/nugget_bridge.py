@@ -1,12 +1,12 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.context import context
-from modules.items import get_item_bag, get_item_by_name
-from modules.map_data import MapFRLG
-from modules.memory import get_event_flag
-from modules.player import get_player_avatar
-from modules.pokemon_party import get_party, get_party_size
+from modules.core.context import context
+from modules.items.items import get_item_bag, get_item_by_name
+from modules.map.map_data import MapFRLG
+from modules.game.memory import get_event_flag
+from modules.player.player import get_player_avatar
+from modules.pokemon.pokemon_party import get_party, get_party_size
 from . import BattleAction
 from ._interface import BotMode, BotModeError
 from .util import navigate_to, wait_for_player_avatar_to_be_standing_still

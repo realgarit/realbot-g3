@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
 from typing import Generator
 
-from modules.battle_state import BattleOutcome
-from modules.menuing import use_field_move
-from modules.player import get_player_avatar
+from modules.battle.battle_state import BattleOutcome
+from modules.menus.menuing import use_field_move
+from modules.player.player import get_player_avatar
 from ._asserts import assert_player_has_poke_balls, assert_boxes_or_party_can_fit_pokemon
 from ._interface import BotMode
 

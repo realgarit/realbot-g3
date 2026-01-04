@@ -1,11 +1,11 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.context import context
-from modules.map import get_effective_encounter_rates_for_current_map, get_map_data
-from modules.map_data import MapFRLG, MapRSE
-from modules.player import get_player_avatar
-from modules.state_cache import state_cache
+from modules.core.context import context
+from modules.map.map import get_effective_encounter_rates_for_current_map, get_map_data
+from modules.map.map_data import MapFRLG, MapRSE
+from modules.player.player import get_player_avatar
+from modules.core.state_cache import state_cache
 from modules.web.state import _update_via_work_queue
 
 route = web.RouteTableDef()

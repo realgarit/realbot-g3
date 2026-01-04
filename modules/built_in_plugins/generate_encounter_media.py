@@ -7,16 +7,16 @@ from typing import Generator, TYPE_CHECKING
 
 import PIL.Image
 
-from modules.context import context
-from modules.encounter import EncounterValue
-from modules.main import work_queue
+from modules.core.context import context
+from modules.pokemon.encounter import EncounterValue
+from modules.core.main import work_queue
 from modules.modes import BotListener, BotMode, FrameInfo
-from modules.plugin_interface import BotPlugin
-from modules.tcg_card import get_tcg_card_file_name, generate_tcg_card
+from modules.core.plugin_interface import BotPlugin
+from modules.items.tcg_card import get_tcg_card_file_name, generate_tcg_card
 
 if TYPE_CHECKING:
-    from modules.battle_state import BattleOutcome
-    from modules.encounter import EncounterInfo
+    from modules.battle.battle_state import BattleOutcome
+    from modules.pokemon.encounter import EncounterInfo
 
 
 class GifGeneratorListener(BotListener):

@@ -1,9 +1,9 @@
 # Copyright (c) 2026 realgarit
 from aiohttp import web
 
-from modules.context import context
-from modules.libmgba import inputs_to_strings
-from modules.main import work_queue
+from modules.core.context import context
+from modules.game.libmgba import inputs_to_strings
+from modules.core.main import work_queue
 
 route = web.RouteTableDef()
 

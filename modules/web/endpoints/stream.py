@@ -6,7 +6,7 @@ import queue
 import aiohttp.client_exceptions
 from aiohttp import web
 
-from modules.context import context
+from modules.core.context import context
 from modules.web.http_stream import add_subscriber
 
 route = web.RouteTableDef()
