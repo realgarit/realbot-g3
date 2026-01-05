@@ -4,6 +4,7 @@
 import argparse
 import atexit
 import os
+import sys
 import pathlib
 import platform
 from dataclasses import dataclass
