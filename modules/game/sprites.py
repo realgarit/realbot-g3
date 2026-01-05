@@ -81,7 +81,11 @@ def generate_placeholder_image(width: int, height: int) -> PIL.Image:
 
 def _get_pokemon_sprite_path(pokemon_or_species: Pokemon | Species, sprite_directory: str) -> Path:
     if isinstance(pokemon_or_species, Pokemon):
-        file_name = pokemon_or_species.species_name_for_stats
+        species = pokemon_or_species.species
+        if species.name == "Unown":
+            file_name = f"Unown ({pokemon_or_species.unown_letter})"
+        else:
+            file_name = species.name
     elif pokemon_or_species.name == "Unown":
         # R for RealBot!
         file_name = "Unown (R)"
