@@ -381,10 +381,26 @@ class Pokemon:
         origins_byte = unpack_uint16(data[46:48])
         return {
             "level_met": origins_byte & 0x7F,
-            "game_of_origin": ROMLanguage((origins_byte >> 7) & 0xF),  # Actually game ID, not language
+            "game_of_origin": self.game_of_origin,
             "pokeball": (origins_byte >> 11) & 0xF,
             "ot_gender": "female" if (origins_byte >> 15) & 1 else "male",
         }
+
+    @property
+    def game_of_origin(self) -> str:
+        """Returns the game name where this Pokémon originated from."""
+        data = self._decrypted_data()
+        origins_byte = unpack_uint16(data[46:48])
+        game_id = (origins_byte >> 7) & 0xF
+        game_names = {
+            1: "Sapphire",
+            2: "Ruby",
+            3: "Emerald",
+            4: "FireRed",
+            5: "LeafGreen",
+            15: "Colosseum/XD",
+        }
+        return game_names.get(game_id, "Unknown")
 
     @property
     def ivs(self) -> StatsValues:
