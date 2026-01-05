@@ -143,8 +143,11 @@ async def _process_message(message: DiscordMessage) -> None:
 
 
 def discord_rich_presence_loop() -> None:
-    rpc = Presence("1457690292911341690")
-    rpc.connect()
+    try:
+        rpc = Presence("1457690292911341690")
+        rpc.connect()
+    except Exception:
+        return
     start = time.time()
 
     if context.rom.is_ruby:
