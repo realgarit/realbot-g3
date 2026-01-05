@@ -468,17 +468,17 @@ class Pokemon:
         return get_nature_by_index(self.personality_value % 25)
 
     @property
-    def gender(self) -> str:
+    def gender(self) -> Literal["male", "female"] | None:
         gender_threshold = self.species.gender_ratio
         if gender_threshold == 255:
-            return "Genderless"
+            return None
         elif gender_threshold == 254:
-            return "Female"
+            return "female"
         elif gender_threshold == 0:
-            return "Male"
+            return "male"
         else:
             gender_value = self.personality_value & 0xFF
-            return "Female" if gender_value >= gender_threshold else "Male"
+            return "female" if gender_value < gender_threshold else "male"
 
     @property
     def shiny_value(self) -> int:
