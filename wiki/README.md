@@ -8,6 +8,8 @@ If you find something missing or wrong, feel free to [report an issue](pages/Rep
 
 ### 🏁 Getting Started
 - ❓ [Getting Started Guide](pages/Getting%20Started.md)
+- 🐧 [Linux Installation & Headless](pages/Linux%20Installation.md)
+- 🍎 [macOS Installation](pages/MacOS%20Installation.md)
 - 🌍 [Supported Games & Languages](pages/Supported%20Games%20and%20Languages.md)
 - 🔎 [Pokémon by Bot Mode](pages/Pokemon%20By%20Bot%20Mode.md)
 - 🆘 [How to Report an Issue](pages/Report%20an%20Issue.md)

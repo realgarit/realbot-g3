@@ -22,12 +22,7 @@
   - Python 3.13 includes **Tkinter 9**, which is required for the bot's UI to look correct and fix scaling issues.
 
 ### Linux (Ubuntu/Debian/Arch)
-- **Python 3.13**
-  - Run `sudo apt install python3.13` (or your distro's equivalent).
-- **Dependencies**
-  - `sudo apt install python3.13-venv python3-tk libmgba0.10 portaudio19-dev`
-  - Note: You must treat `python3-tk` as required for the UI.
-- If `libmgba0.10` isn't in your repos, grab the .deb from [mgba.io](https://mgba.io/downloads.html).
+- See the [Linux Installation guide](/wiki/pages/Linux%20Installation.md).
 
 ### macOS
 - See the [macOS Installation guide](/wiki/pages/MacOS%20Installation.md).
