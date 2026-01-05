@@ -11,7 +11,20 @@ You will need **Python 3.13** and a few system libraries for emulation and audio
 ### Install Dependencies
 Run the command for your distribution:
 
-**Ubuntu / Debian / Pop!_OS:**
+**Ubuntu & Derivatives (Mint, Pop!_OS):**
+If `apt` says it cannot locate `python3.13`, you need to add the deadsnakes PPA:
+```bash
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
+```
+Then install the dependencies:
+```bash
+sudo apt install python3.13 python3.13-venv python3-tk libmgba0.10 portaudio19-dev
+```
+*Note: If `apt` selects `libmgba0.10t64` instead of `libmgba0.10`, that is fine.*
+
+**Debian:**
+Debian does not support PPAs. If Python 3.13 is not in your repositories, you may need to build it from source or use `testing`/`unstable` repos.
 ```bash
 sudo apt update
 sudo apt install python3.13 python3.13-venv python3-tk libmgba0.10 portaudio19-dev
