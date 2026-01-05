@@ -143,7 +143,7 @@ async def _process_message(message: DiscordMessage) -> None:
 
 
 def discord_rich_presence_loop() -> None:
-    rpc = Presence("1125400717054713866")
+    rpc = Presence("1457690292911341690")
     rpc.connect()
     start = time.time()
 
