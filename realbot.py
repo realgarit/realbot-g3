@@ -142,7 +142,9 @@ if __name__ == "__main__":
         import signal
 
         def signal_handler(signum, frame):
-            sys.exit(0)
+            if context.emulator:
+                context.emulator.shutdown()
+            os._exit(0)
 
         signal.signal(signal.SIGTERM, signal_handler)
         signal.signal(signal.SIGHUP, signal_handler)
