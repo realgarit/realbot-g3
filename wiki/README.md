@@ -1,8 +1,8 @@
 # 📚 realbot-g3 Wiki
 
-Welcome to the [`realbot-g3`](https://github.com/realgar/realbot-g3) wiki! This is where you'll find everything you need to know about setting up and using the bot.
+Welcome to the [`realbot-g3`](https://github.com/realgarit/realbot-g3) wiki! This is where you'll find everything you need to know about setting up and using the bot.
 
-If you find something missing or wrong, feel free to [report an issue](pages/Report%20an%20Issue.md) or [open a pull request](https://github.com/realgar/realbot-g3/pulls).
+If you find something missing or wrong, feel free to [report an issue](pages/Report%20an%20Issue.md) or [open a pull request](https://github.com/realgarit/realbot-g3/pulls).
 
 ---
 

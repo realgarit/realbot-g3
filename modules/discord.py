@@ -189,7 +189,7 @@ def discord_rich_presence_loop() -> None:
                 details=" | ".join(details),
                 large_image=large_image,
                 start=int(start),
-                buttons=[{"label": "⏬ Download RealBot G3", "url": "https://github.com/realgar/realbot-g3"}],
+                buttons=[{"label": "⏬ Download RealBot G3", "url": "https://github.com/realgarit/realbot-g3"}],
             )
         except Exception as error:
             console.print(f"[yellow]Setting Discord Rich Presence failed:[/] {str(error)}")

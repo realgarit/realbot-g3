@@ -70,7 +70,7 @@ class EmulatorControls:
         self.help_menu = Menu(self.window, tearoff=0)
         self.help_menu.add_command(
             label=f"{realbot_name} Wiki",
-            command=lambda: webbrowser.open_new_tab("https://github.com/realgar/realbot-g3/tree/main/wiki"),
+            command=lambda: webbrowser.open_new_tab("https://github.com/realgarit/realbot-g3/tree/main/wiki"),
         )
         self.help_menu.add_command(
             label="Discord Support",

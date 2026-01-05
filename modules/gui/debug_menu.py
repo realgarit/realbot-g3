@@ -318,6 +318,6 @@ class DebugMenu(Menu):
         self.add_command(
             label="Help",
             command=lambda: webbrowser.open_new_tab(
-                "https://github.com/realgar/realbot-g3/blob/main/wiki/pages/Data%20Manipulation%20-%20Save%20Modification.md"
+                "https://github.com/realgarit/realbot-g3/blob/main/wiki/pages/Data%20Manipulation%20-%20Save%20Modification.md"
             ),
         )

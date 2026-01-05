@@ -1,5 +1,4 @@
-# See here for valid keys: https://www.tcl.tk/man/tcl8.4/TkCmd/keysyms.html
-# or: https://anzeljg.github.io/rin2/book2/2405/docs/tkinter/key-names.html (column `.keysym`)
+# See wiki for documentation: https://github.com/realgarit/realbot-g3/tree/main/wiki/pages/Configuration%20-%20Key%20Mappings.md
 
 # Default mGBA mapping
 gba:
@@ -7,10 +6,10 @@ gba:
   Down: Down
   Left: Left
   Right: Right
-  A: x
-  B: z
-  L: a
-  R: s
+  A: a
+  B: s
+  L: q
+  R: w
   Start: Return
   Select: BackSpace
 

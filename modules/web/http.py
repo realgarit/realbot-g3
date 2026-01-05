@@ -49,7 +49,7 @@ def http_server(host: str, port: int) -> web.AppRunner:
             version=realbot_version,
             license=dict(
                 name="GNU General Public License v3.0",
-                url="https://github.com/realgar/realbot-g3/blob/main/LICENSE",
+                url="https://github.com/realgarit/realbot-g3/blob/main/LICENSE",
             ),
         ),
         servers=[

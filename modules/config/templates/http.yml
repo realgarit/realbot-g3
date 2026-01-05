@@ -1,4 +1,4 @@
-# See wiki for documentation: https://github.com/realgar/realbot-g3/tree/main/wiki/pages/Configuration%20-%20HTTP%20Server.md
+# See wiki for documentation: https://github.com/realgarit/realbot-g3/tree/main/wiki/pages/Configuration%20-%20HTTP%20Server.md
 
 http_server:
   enable: false

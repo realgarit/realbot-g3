@@ -42,7 +42,7 @@ def get_last_update_check_datetime() -> datetime | None:
 
 def get_most_recent_release_on_github() -> ReleaseInfo | None:
     try:
-        response = requests.get("https://api.github.com/repos/realgar/realbot-g3/releases/latest")
+        response = requests.get("https://api.github.com/repos/realgarit/realbot-g3/releases/latest")
         if response.status_code != 200:
             return None
         data = response.json()

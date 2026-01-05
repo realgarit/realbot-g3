@@ -1,4 +1,4 @@
-# See wiki for documentation: https://github.com/realgar/realbot-g3/tree/main/wiki/pages/Console,%20Logging%20and%20Image%20Config.md
+# See wiki for documentation: https://github.com/realgarit/realbot-g3/tree/main/wiki/pages/Console,%20Logging%20and%20Image%20Config.md
 
 # Log _all_ encounters (and not just shiny ones) to the stats database.
 # This doesn't impact performance much, but it means that the database
