@@ -306,6 +306,7 @@ class DiscordPlugin(BotPlugin):
             context.config.discord.tcg_cards.enable
             and context.config.logging.tcg_cards
             and encounter.tcg_card_path is not None
+            and encounter.tcg_card_path.exists()
         ):
             send_discord_message(
                 webhook_config=context.config.discord.tcg_cards,

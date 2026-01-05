@@ -37,7 +37,7 @@ def draw_text(
     shadow_colour: str = "#6B5A73",
     anchor: str = "lt",
 ) -> ImageDraw:
-    font = ImageFont.truetype(font=str(Path(__file__).parent / "fonts" / "pokemon-rs.ttf"), size=size)
+    font = ImageFont.truetype(font=str(Path(__file__).parent.parent / "fonts" / "pokemon-rs.ttf"), size=size)
 
     # Draw text shadow
     draw.text(

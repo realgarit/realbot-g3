@@ -496,17 +496,10 @@ class Pokemon:
     @property
     def is_anti_shiny(self) -> bool:
         """
-        An 'Anti-Shiny' is a Pokémon that would have been shiny if the PID and Trainer ID
-        were matched up differently.
-        Specifically, (TID ^ PID_HI) ^ (SID ^ PID_LO) < 8.
-        It doesn't actually do anything in-game; it's just a neat detail.
+        An 'Anti-Shiny' is when the shiny value is at the opposite end of the range (65528-65535
+        instead of 0-7). It doesn't actually do anything in-game; it's just a neat detail.
         """
-        trainer_id = self.original_trainer.id
-        secret_id = self.original_trainer.secret_id
-        personality_value = self.personality_value
-        p1 = (personality_value >> 16) & 0xFFFF
-        p2 = personality_value & 0xFFFF
-        return (trainer_id ^ p1) ^ (secret_id ^ p2) < 8
+        return 65528 <= self.shiny_value <= 65535
 
     @property
     def hidden_power_type(self) -> Type:
