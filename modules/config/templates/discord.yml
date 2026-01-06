@@ -5,17 +5,17 @@ delay: 0
 iv_format: formatted # `basic`, `formatted`
 
 # ==============================================================================
-# DEFAULT SETTINGS (Main Bot Identity)
+# DEFAULT SETTINGS (Used by "Shiny Encounters" Group)
 # ==============================================================================
 bot_id: "RealBot G3"
-# bot_username: "My Bot"  # Optional - if not set, uses game name (e.g., "Sapphire Bot")
+bot_username: "Shiny Bot"
 # bot_avatar_url: "https://example.com/avatar.png"
 global_webhook_url: ""
 
 
 # ==============================================================================
 # GROUP 1: SHINY ENCOUNTERS
-# (Inherits global_webhook_url; bot_username defaults to game name like "Emerald Bot")
+# Bot Name: "Shiny Bot" (inherited from default)
 # ==============================================================================
 
 shiny_pokemon_encounter:
@@ -38,10 +38,14 @@ custom_filter_pokemon_encounter:
   ping_mode:
   ping_id:
 
+tcg_cards:
+  enable: false
+
 
 # ==============================================================================
 # GROUP 2: LOG EVENTS
-# (Bot name is dynamic; you can override webhook_url for a second channel)
+# Bot Name: "Log Bot" (set explicitly per entry)
+# Override webhook_url for a second channel
 # ==============================================================================
 
 pokemon_encounter_milestones:
@@ -49,6 +53,7 @@ pokemon_encounter_milestones:
   interval: 10000
   ping_mode:
   ping_id:
+  bot_username: "Log Bot"
   # webhook_url: "https://discord.com/api/webhooks/..."
 
 shiny_pokemon_encounter_milestones:
@@ -56,6 +61,7 @@ shiny_pokemon_encounter_milestones:
   interval: 5
   ping_mode:
   ping_id:
+  bot_username: "Log Bot"
   # webhook_url: "https://discord.com/api/webhooks/..."
 
 total_encounter_milestones:
@@ -63,6 +69,7 @@ total_encounter_milestones:
   interval: 25000
   ping_mode:
   ping_id:
+  bot_username: "Log Bot"
   # webhook_url: "https://discord.com/api/webhooks/..."
 
 phase_summary:
@@ -71,6 +78,7 @@ phase_summary:
   consequent_interval: 5000
   ping_mode:
   ping_id:
+  bot_username: "Log Bot"
   # webhook_url: "https://discord.com/api/webhooks/..."
 
 pickup:
@@ -78,8 +86,5 @@ pickup:
   interval: 10
   ping_mode:
   ping_id:
-  # webhook_url: "https://discord.com/api/webhooks/..."
-
-tcg_cards:
-  enable: false
+  bot_username: "Log Bot"
   # webhook_url: "https://discord.com/api/webhooks/..."
