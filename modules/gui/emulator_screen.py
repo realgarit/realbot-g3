@@ -1,6 +1,7 @@
 # Copyright (c) 2026 realgarit
 from collections import deque
 from tkinter import PhotoImage, Canvas
+import time
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from typing import Union

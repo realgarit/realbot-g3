@@ -199,7 +199,7 @@ class ForceShinyEncounterListener(BotListener):
                     held_item=opponent.held_item,
                     has_second_ability=opponent.ability is not opponent.species.abilities[0],
                     nature=opponent.nature,
-                    experience=opponent.total_exp,
+                    experience=opponent.experience,
                     friendship=opponent.friendship,
                     moves=[move for move in opponent.moves if move is not None],
                     ivs=opponent.ivs,

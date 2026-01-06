@@ -165,7 +165,7 @@ def debug_create_pokemon(
         experience = (
             species.level_up_type.get_experience_needed_for_level(level)
             if original_pokemon is None
-            else original_pokemon.total_exp
+            else original_pokemon.experience
         )
     else:
         min_exp = species.level_up_type.get_experience_needed_for_level(level)
@@ -269,7 +269,7 @@ def debug_create_pokemon(
             + (b"\x00" * 20)
         )
     else:
-        decrypted_data = original_pokemon._decrypted_data
+        decrypted_data = original_pokemon._decrypted_data()
 
     if is_egg and friendship > species.egg_cycles:
         friendship = species.egg_cycles

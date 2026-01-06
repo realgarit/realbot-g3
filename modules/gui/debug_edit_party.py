@@ -104,7 +104,7 @@ class PokemonEditFrame:
         self._nickname_var = tkinter.StringVar(parent, value=pokemon.nickname)
         if pokemon.is_empty or pokemon.nickname.upper() == pokemon.species.localised_names[context.rom.language.value]:
             self._nickname_var.set("")
-        self._experience = tkinter.IntVar(value=pokemon.total_exp)
+        self._experience = tkinter.IntVar(value=pokemon.experience)
         self._level = tkinter.IntVar(value=pokemon.level)
         self._is_shiny_var = tkinter.BooleanVar(value=pokemon.is_shiny and not pokemon.is_empty)
         self._is_egg_var = tkinter.BooleanVar(value=pokemon.is_egg)
@@ -587,7 +587,7 @@ class PokemonEditFrame:
 
         level_type = self._species.level_up_type
         set_type = tkinter.StringVar(value="exp")
-        experience = tkinter.IntVar(value=self._pokemon.total_exp)
+        experience = tkinter.IntVar(value=self._pokemon.experience)
         level = tkinter.IntVar(value=self._pokemon.level)
 
         experience_entry: ttk.Spinbox | None = None
