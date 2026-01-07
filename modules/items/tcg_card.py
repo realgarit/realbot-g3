@@ -1,5 +1,6 @@
 # Copyright (c) 2026 realgarit
 import os
+import uuid
 from datetime import datetime
 from pathlib import Path
 
@@ -50,10 +51,27 @@ def draw_text(
     return draw
 
 
+def get_pretty_name(pokemon: Pokemon) -> str:
+    """
+    Returns a nice name for the Pokemon.
+    If it has a real nickname, we use that.
+    If it just has the default Gen 3 ALL CAPS species name, we use the Title Case version.
+    """
+    nickname = pokemon.nickname.strip()
+    species_name = pokemon.species.name
+    
+    # In Gen 3, non-nicknamed Pokemon have their species name in ALL CAPS as nickname.
+    if nickname.isupper() and nickname == species_name.upper():
+        return species_name
+    
+    return pokemon.name
+
+
 def get_tcg_card_file_name(pokemon: Pokemon) -> str:
+    name = get_pretty_name(pokemon)
     return (
         f"{pokemon.species.national_dex_number:03}{' ★' if pokemon.is_shiny else ''}"
-        f" - {pokemon.name} - {pokemon.nature} "
+        f" - {name} - {pokemon.nature} "
         f"[{pokemon.ivs.sum()}] - {hex(pokemon.personality_value)[2:].upper()}.png"
     )
 
@@ -303,11 +321,10 @@ def generate_tcg_card(pokemon_data: bytes, location: str = "") -> Path | None:
 
         # Save card
         cards_dir = context.profile.path / "screenshots" / "cards"
-        if not cards_dir.exists():
-            cards_dir.mkdir(parents=True)
+        cards_dir.mkdir(parents=True, exist_ok=True)
 
         file_name = get_tcg_card_file_name(pokemon)
-        tmp_card_file = cards_dir / (file_name + ".tmp")
+        tmp_card_file = cards_dir / f"{file_name}.{uuid.uuid4()}.tmp"
         card_file = cards_dir / file_name
         card.save(tmp_card_file, format="png")
 

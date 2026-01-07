@@ -102,6 +102,7 @@ class GenerateEncounterMediaPlugin(BotPlugin):
             location = encounter.map.pretty_name if encounter.map is not None else ""
             Thread(target=generate_tcg_card, args=(encounter.pokemon.data, location)).start()
 
+
     def on_wild_encounter_visible(self, encounter: "EncounterInfo") -> Generator | None:
         # Finalise and save encounter GIF
         if self._listener is not None:
@@ -122,9 +123,6 @@ class GenerateEncounterMediaPlugin(BotPlugin):
             context.bot_listeners.remove(self._listener)
             self._listener = None
 
-        # Generate TCG card
-        self._generate_tcg_card_if_shiny(encounter)
-
         return None
 
     def on_battle_ended(self, outcome: "BattleOutcome") -> Generator | None:
@@ -140,5 +138,7 @@ class GenerateEncounterMediaPlugin(BotPlugin):
     def on_egg_hatched(self, hatched_pokemon: "EncounterInfo") -> Generator | None:
         # We can't really generate a GIF for hatched eggs (as we don't have the battle animation)
         # but we can definitely generate a TCG card.
-        self._generate_tcg_card_if_shiny(hatched_pokemon)
+        # This is now handled by on_logging_encounter which is called for all encounters.
+        pass
+
         return None

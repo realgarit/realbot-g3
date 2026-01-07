@@ -305,17 +305,30 @@ class DiscordPlugin(BotPlugin):
                 ),
             )
 
+
         # Discord TCG cards
         if (
             context.config.discord.tcg_cards.enable
             and context.config.logging.tcg_cards
             and encounter.tcg_card_path is not None
-            and encounter.tcg_card_path.exists()
         ):
-            send_discord_message(
-                webhook_config=context.config.discord.tcg_cards,
-                content="",
-                image=encounter.tcg_card_path,
-            )
+
+            def wait_and_send_tcg():
+                import time
+
+                # Wait for up to 10 seconds for the card to be generated
+                for _ in range(20):
+                    if encounter.tcg_card_path.exists():
+                        send_discord_message(
+                            webhook_config=context.config.discord.tcg_cards,
+                            content="",
+                            image=encounter.tcg_card_path,
+                        )
+                        return
+                    time.sleep(0.5)
+
+            Thread(target=wait_and_send_tcg).start()
+
+        return None
 
         return None
