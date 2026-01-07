@@ -102,7 +102,6 @@ class GenerateEncounterMediaPlugin(BotPlugin):
             location = encounter.map.pretty_name if encounter.map is not None else ""
             Thread(target=generate_tcg_card, args=(encounter.pokemon.data, location)).start()
 
-
     def on_wild_encounter_visible(self, encounter: "EncounterInfo") -> Generator | None:
         # Finalise and save encounter GIF
         if self._listener is not None:

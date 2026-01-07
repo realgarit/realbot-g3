@@ -5,7 +5,7 @@ delay: 0
 iv_format: formatted # `basic`, `formatted`
 
 # ==============================================================================
-# DEFAULT SETTINGS (Used by "Shiny Encounters" Group)
+# DEFAULT SETTINGS (Used by "Shiny Bot" Group)
 # ==============================================================================
 bot_id: "RealBot G3"
 bot_username: "Shiny Bot"
@@ -14,7 +14,7 @@ global_webhook_url: ""
 
 
 # ==============================================================================
-# GROUP 1: SHINY ENCOUNTERS
+# GROUP 1: SHINY BOT (Encounters & Media)
 # Bot Name: "Shiny Bot" (inherited from default)
 # ==============================================================================
 
@@ -40,10 +40,12 @@ custom_filter_pokemon_encounter:
 
 tcg_cards:
   enable: false
+  ping_mode:
+  ping_id:
 
 
 # ==============================================================================
-# GROUP 2: LOG EVENTS
+# GROUP 2: LOG BOT (Milestones & Stats)
 # Bot Name: "Log Bot" (set explicitly per entry)
 # Override webhook_url for a second channel
 # ==============================================================================

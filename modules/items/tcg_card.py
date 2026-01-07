@@ -232,10 +232,25 @@ def generate_tcg_card(pokemon_data: bytes, location: str = "") -> Path | None:
         )
 
         # Encounter sprite
-        sprite_type = "shiny" if pokemon.is_shiny else "normal"
+        # sprite_type = "shiny" if pokemon.is_shiny else "normal"
         # Use species.name for proper case (e.g., "Torchic" not "TORCHIC")
-        species_name_safe = make_string_safe_for_file_name(pokemon.species.name)
-        sprite = Image.open(get_sprites_path() / "pokemon" / sprite_type / f"{species_name_safe}.png")
+        # species_name_safe = make_string_safe_for_file_name(pokemon.species.name)
+        # sprite = Image.open(get_sprites_path() / "pokemon" / sprite_type / f"{species_name_safe}.png")
+        
+        # NOTE: Falling back to simpler sprite logic for now to ensure robustness
+        # across different ROM data structures.
+        sprite_type = "shiny" if pokemon.is_shiny else "normal"
+        species_name = pokemon.species.name
+        sprite_file = f"{make_string_safe_for_file_name(species_name)}.png"
+        sprite_path = get_sprites_path() / "pokemon" / sprite_type / sprite_file
+        
+        try:
+            sprite = Image.open(sprite_path)
+        except FileNotFoundError:
+            # Fallback for case sensitivity or missing species name
+            console.print(f"[warning] Could not find sprite at {sprite_path}, trying default...[/]")
+            sprite = Image.open(get_sprites_path() / "pokemon" / sprite_type / "000.png")
+
         card.paste(
             sprite,
             (int(425 - (sprite.width / 2)), int(250 - (sprite.height - (sprite.height - sprite.getbbox()[3])))),
@@ -277,9 +292,11 @@ def generate_tcg_card(pokemon_data: bytes, location: str = "") -> Path | None:
             shadow_colour="#DED7B5",
             anchor="lm",
         )
+        # Support for older Pokemon class structure if necessary
+        defence = getattr(pokemon.ivs, 'defence', getattr(pokemon.ivs, 'defense', 0))
         draw = draw_text(
             draw,
-            text=str(pokemon.ivs.defence),
+            text=str(defence),
             coords=(491, 274),
             text_colour="#000",
             shadow_colour="#DED7B5",
