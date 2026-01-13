@@ -321,8 +321,8 @@ class DiscordPlugin(BotPlugin):
                     if encounter.tcg_card_path.exists():
 
                         send_discord_message(
-                            webhook_config=context.config.discord.shiny_pokemon_encounter,
-                            content="",
+                            webhook_config=context.config.discord.tcg_cards,
+                            content="🎴 TCG card for the shiny encounter!",
                             image=encounter.tcg_card_path,
                         )
                         return

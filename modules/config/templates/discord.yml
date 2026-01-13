@@ -27,21 +27,25 @@ blocked_shiny_encounter:
   enable: false
   ping_mode:
   ping_id:
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
 anti_shiny_pokemon_encounter:
   enable: false
   ping_mode:
   ping_id:
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
 custom_filter_pokemon_encounter:
   enable: false
   ping_mode:
   ping_id:
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
 tcg_cards:
   enable: false
   ping_mode:
   ping_id:
+  # webhook_url: "https://discord.com/api/webhooks/..."
 
 
 # ==============================================================================
