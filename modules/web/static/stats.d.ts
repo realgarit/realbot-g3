@@ -90,6 +90,7 @@ export type ShinyPhase = {
         start_time: string;
         end_time: string | null;
         encounters: number;
+        anti_shiny_encounters: number;
         highest_iv_sum: SpeciesRecord;
         lowest_iv_sum: SpeciesRecord;
         highest_sv: SpeciesRecord;
@@ -117,6 +118,7 @@ export type GlobalStats = {
     current_phase: {
         start_time: string;
         encounters: number;
+        anti_shiny_encounters: number;
         highest_iv_sum: SpeciesRecord;
         lowest_iv_sum: SpeciesRecord;
         highest_sv: SpeciesRecord;

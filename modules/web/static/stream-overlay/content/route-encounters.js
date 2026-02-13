@@ -9,7 +9,8 @@ import {
     getSpeciesGoal, overlaySprite, getEmptySpeciesEntry, getSpeciesCatches
 } from "../helper.js";
 
-const mapNameSpan = document.querySelector("#route-encounters > h2 > span");
+const mapNameSpan = document.querySelector("#map-name") ?? document.querySelector("#route-encounters > h2 > span");
+const antiShinyCounter = document.querySelector("#anti-shiny-counter");
 const tbody = document.querySelector("#route-encounters tbody");
 const table = document.querySelector("#route-encounters table");
 const noEncountersMessage = document.querySelector("#no-encounters-on-this-route-message");
@@ -22,46 +23,39 @@ const updateMapName = map => {
 };
 
 /**
- * @param {RealbotApi.GetMapEncountersResponse} encounters
- * @param {RealbotApi.GetStatsResponse} stats
- * @param {EncounterType} encounterType
- * @param {StreamOverlay.SectionChecklist} checklistConfig
- * @param {string} botMode
- * @param {boolean} daycareMode
- * @param {Encounter[]} [encounterLog]
- * @param {Set<string>} [additionalRouteSpecies]
- * @param {string} [animateSpecies]
+ * @param {OverlayState} state
+ * @return {MapEncounter[]}
  */
-const updateRouteEncountersList = (encounters, stats, encounterType, checklistConfig, botMode, daycareMode, encounterLog = [], additionalRouteSpecies = null, animateSpecies = null) => {
+const getEncounterList = (state) => {
     /** @type {MapEncounter[]} encounterList */
     let encounterList;
     /** @type {MapEncounter[]} regularEncounterList */
     let regularEncounterList;
-    if (daycareMode || botMode.toLowerCase().includes("daycare") || botMode.toLowerCase().includes("kecleon")) {
+    if (state.daycareMode || state.emulator.bot_mode.toLowerCase().includes("daycare") || state.emulator.bot_mode.toLowerCase().includes("kecleon")) {
         encounterList = [];
         regularEncounterList = [];
-    } else if (encounterType === "surfing") {
-        encounterList = [...encounters.effective.surf_encounters];
-        regularEncounterList = [...encounters.regular.surf_encounters];
-    } else if (encounterType === "fishing_old_rod") {
-        encounterList = [...encounters.effective.old_rod_encounters];
-        regularEncounterList = [...encounters.regular.old_rod_encounters];
-    } else if (encounterType === "fishing_good_rod") {
-        encounterList = [...encounters.effective.good_rod_encounters];
-        regularEncounterList = [...encounters.regular.good_rod_encounters];
-    } else if (encounterType === "fishing_super_rod") {
-        encounterList = [...encounters.effective.super_rod_encounters];
-        regularEncounterList = [...encounters.regular.super_rod_encounters];
-    } else if (encounterType === "rock_smash") {
-        encounterList = [...encounters.effective.rock_smash_encounters];
-        regularEncounterList = [...encounters.regular.rock_smash_encounters];
+    } else if (state.lastEncounterType === "surfing") {
+        encounterList = [...state.mapEncounters.effective.surf_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.surf_encounters];
+    } else if (state.lastEncounterType === "fishing_old_rod") {
+        encounterList = [...state.mapEncounters.effective.old_rod_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.old_rod_encounters];
+    } else if (state.lastEncounterType === "fishing_good_rod") {
+        encounterList = [...state.mapEncounters.effective.good_rod_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.good_rod_encounters];
+    } else if (state.lastEncounterType === "fishing_super_rod") {
+        encounterList = [...state.mapEncounters.effective.super_rod_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.super_rod_encounters];
+    } else if (state.lastEncounterType === "rock_smash") {
+        encounterList = [...state.mapEncounters.effective.rock_smash_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.rock_smash_encounters];
     } else {
-        encounterList = [...encounters.effective.land_encounters];
-        regularEncounterList = [...encounters.regular.land_encounters];
+        encounterList = [...state.mapEncounters.effective.land_encounters];
+        regularEncounterList = [...state.mapEncounters.regular.land_encounters];
     }
 
     // Add species that could appear on this map but are currently blocked by Repel and
-    // therefore not part of the 'effective encounters' list.
+    // therefore not part of the "effective encounters" list.
     for (const regularEncounter of regularEncounterList) {
         let alreadyInList = false;
         for (const encounterSpecies of encounterList) {
@@ -81,7 +75,7 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
 
     // Add species to this list that have been encountered here but are not part of the
     // regular encounter table (i.e. egg hatches, gift Pokémon, ...)
-    for (const speciesName of additionalRouteSpecies) {
+    for (const speciesName of state.additionalRouteSpecies) {
         let alreadyInList = false;
         for (const encounterSpecies of encounterList) {
             if (encounterSpecies.species_name === speciesName) {
@@ -94,9 +88,9 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
         }
     }
 
-    if (botMode.toLowerCase().includes("feebas") && ["surfing", "fishing_old_rod", "fishing_good_rod", "fishing_super_rod"].includes(encounterType)) {
+    if (state.emulator.bot_mode.toLowerCase().includes("feebas") && ["surfing", "fishing_old_rod", "fishing_good_rod", "fishing_super_rod"].includes(state.lastEncounterType)) {
         let hasRecentlySeenFeebas = false;
-        for (const recentEncounter of encounterLog) {
+        for (const recentEncounter of state.encounterLog) {
             if (recentEncounter.pokemon.species.name === "Feebas") {
                 hasRecentlySeenFeebas = true;
                 break;
@@ -121,8 +115,31 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
         }
     }
 
-    // Display a 'no encounters on this map' message if no encounters exist at all.
-    if (encounterList.length === 0) {
+    return encounterList;
+}
+
+/**
+ * @typedef {Object} RouteEncounterEntry
+ * @property {string} species_name
+ * @property {number} encounter_rate
+ * @property {number} goal
+ * @property {number} catches
+ * @property {number} total_encounters
+ * @property {number} shiny_encounters
+ * @property {number} phase_encounters
+ * @property {number} phase_lowest_sv
+ * @property {number} phase_highest_sv
+ * @property {number} phase_lowest_iv_sum
+ * @property {number} phase_highest_iv_sum
+ * @property {number} shinyTargetCount
+ */
+
+/**
+ * @param {RouteEncounterEntry[]} encountersList
+ */
+const renderRouteEncountersList = (encountersList) => {
+    // Display a "no encounters on this map" message if no encounters exist at all.
+    if (encountersList.length === 0) {
         noEncountersMessage.style.display = "block";
         table.style.display = "none";
         return;
@@ -135,23 +152,25 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
 
     let hasAtLeastOneAnti = false;
     let hasPossibleEncounterThatIsNotAnti = false;
-    for (const encounter of encounterList) {
-        const species = stats.pokemon[encounter.species_name] ?? getEmptySpeciesEntry(encounter.species_id, encounter.species_name);
-        const currentPhase = stats.current_phase;
-
-        let catches = "0";
-        let totalEncounters = "0";
-
-        const goal = getSpeciesGoal(encounter.species_name, checklistConfig, stats);
-        if (goal) {
-            catches = [getSpeciesCatches(encounter.species_name, checklistConfig, stats), small(`/${goal}`)];
-        } else {
-            catches = [formatInteger(species.catches)];
+    for (const entry of encountersList) {
+        if (entry.phase_highest_sv > 65527) {
+            hasAtLeastOneAnti = true;
         }
-        totalEncounters = [formatInteger(species.total_encounters)];
+        if (entry.encounter_rate > 0 && entry.phase_highest_sv < 65528) {
+            hasPossibleEncounterThatIsNotAnti = true;
+        }
+    }
 
-        if (species.shiny_encounters > 0) {
-            const shinyRate = Math.round(species.total_encounters / species.shiny_encounters).toLocaleString("en");
+    for (const entry of encountersList) {
+        let catches = [formatInteger(entry.catches)];
+        let totalEncounters = [formatInteger(entry.total_encounters)];
+
+        if (entry.goal) {
+            catches = [formatInteger(entry.catches), small(`/ ${entry.goal}`)];
+        }
+
+        if (entry.shiny_encounters > 0) {
+            const shinyRate = Math.round(entry.total_encounters / entry.shiny_encounters).toLocaleString("en");
             const shinyRateLabel = document.createElement("span");
             shinyRateLabel.classList.add("shiny-rate");
             const sparkles = overlaySprite("sparkles");
@@ -159,20 +178,22 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
             totalEncounters.push(shinyRateLabel);
         }
 
-        if (species.shiny_encounters > species.catches) {
-            const missedShinies = species.shiny_encounters - species.catches;
+        if (entry.shiny_encounters > entry.catches) {
+            const missedShinies = entry.shiny_encounters - entry.catches;
             const missedShiniesLabel = document.createElement("span");
             missedShiniesLabel.classList.add("missed-shinies")
             missedShiniesLabel.textContent = `(${formatInteger(missedShinies)} missed)`;
             catches.push(missedShiniesLabel);
         }
 
-        if (goal && species.catches >= goal) {
-            const tick = document.createElement("img")
-            tick.src = "/static/sprites/stream-overlay/tick.png";
-            tick.classList.add("tick");
-            catches.push(tick);
-        } else if (goal) {
+        for (let index = 0; index < entry.shinyTargetCount; index++) {
+             const tick = document.createElement("img")
+             tick.src = "/static/sprites/stream-overlay/tick.png";
+             tick.classList.add("tick");
+             catches.push(tick);
+        }
+
+        if (entry.goal && entry.catches < entry.goal) {
             const tick = document.createElement("img")
             tick.src = "/static/sprites/stream-overlay/target.png";
             tick.classList.add("tick");
@@ -180,38 +201,116 @@ const updateRouteEncountersList = (encounters, stats, encounterType, checklistCo
         }
 
         let spriteType = "normal";
-        let animate = encounter.species_name === animateSpecies;
-        if (species && species.phase_highest_sv > 65527) {
+        if (entry.phase_highest_sv > 65527) {
             spriteType = "anti-shiny";
-            hasAtLeastOneAnti = true;
         }
-        if (encounter.encounter_rate > 0 && (!species || species.phase_highest_sv < 65528)) {
-            hasPossibleEncounterThatIsNotAnti = true;
-        }
-        if (species && encounter.encounter_rate <= 0 && hasAtLeastOneAnti && !hasPossibleEncounterThatIsNotAnti) {
+        if (entry.encounter_rate <= 0 && hasAtLeastOneAnti && !hasPossibleEncounterThatIsNotAnti) {
             spriteType = "anti-shiny";
         }
 
-        tbody.append(renderTableRow({
-            sprite: speciesSprite(encounter.species_name, spriteType, animate),
-            odds: encounter.encounter_rate > 0 ? Math.round(encounter.encounter_rate * 100) + "%" : "",
-            svRecords: species && species.phase_lowest_sv && species.phase_highest_sv
-                ? [colouredShinyValue(species.phase_lowest_sv), br(), colouredShinyValue(species.phase_highest_sv)]
+        const row = renderTableRow({
+            sprite: speciesSprite(entry.species_name, spriteType),
+            odds: entry.encounter_rate > 0 ? Math.round(entry.encounter_rate * 100) + "%" : "",
+            svRecords: entry.phase_lowest_sv && entry.phase_highest_sv
+                ? [colouredShinyValue(entry.phase_lowest_sv), br(), colouredShinyValue(entry.phase_highest_sv)]
                 : "",
-            ivRecords: species && species.phase_highest_iv_sum && species.phase_lowest_iv_sum
-                ? [colouredIVSum(species.phase_highest_iv_sum), br(), colouredIVSum(species.phase_lowest_iv_sum)]
+            ivRecords: entry.phase_highest_iv_sum && entry.phase_lowest_iv_sum
+                ? [colouredIVSum(entry.phase_highest_iv_sum), br(), colouredIVSum(entry.phase_lowest_iv_sum)]
                 : "",
-            phaseEncounters: species && species.phase_encounters > 0 && currentPhase.encounters > 0
+            phaseEncounters: entry.phase_encounters > 0
                 ? [
-                    formatInteger(species.phase_encounters),
+                    formatInteger(entry.phase_encounters),
                     br(),
-                    small((100 * species.phase_encounters / currentPhase.encounters).toLocaleString("en", {maximumFractionDigits: 2}) + "%"),
+                    small((100 * entry.phase_encounters / window.overlayState.stats.current_phase.encounters).toLocaleString("en", {maximumFractionDigits: 2}) + "%"),
                 ]
                 : "0",
             totalEncounters: totalEncounters,
             catches: catches,
-        }));
+        });
+        row.dataset.speciesName = entry.species_name;
+        tbody.append(row);
     }
-};
+}
 
-export {updateMapName, updateRouteEncountersList};
+/**
+ * @param {string} speciesName
+ */
+const animateRouteEncounterSprite = (speciesName) => {
+    const row = tbody.querySelector(`tr[data-species-name="${speciesName}"]`);
+    if (row) {
+        const sprite = row.querySelector(".column-sprite img");
+        if (sprite) {
+            sprite.classList.remove("animate");
+            void sprite.offsetWidth;
+            sprite.classList.add("animate");
+        }
+    }
+}
+
+/**
+ * @param {OverlayState} state
+ * @param {StreamOverlay.SectionChecklist} checklistConfig
+ */
+const updateRouteEncountersList = (state, checklistConfig) => {
+    const encounterList = getEncounterList(state);
+
+    /** @type {{[k: string]: RouteEncounterEntry}} */
+    const routeEncounters = {};
+    for (const encounter of encounterList) {
+        const species = state.stats.pokemon[encounter.species_name] ?? getEmptySpeciesEntry(encounter.species_id, encounter.species_name);
+
+        routeEncounters[encounter.species_name] = {
+            species_name: encounter.species_name,
+            encounter_rate: encounter.encounter_rate,
+            goal: getSpeciesGoal(encounter.species_name, checklistConfig),
+            catches: species.catches,
+            total_encounters: species.total_encounters,
+            shiny_encounters: species.shiny_encounters,
+            phase_encounters: species.phase_encounters,
+            phase_lowest_sv: species.phase_lowest_sv,
+            phase_highest_sv: species.phase_highest_sv,
+            phase_lowest_iv_sum: species.phase_lowest_iv_sum,
+            phase_highest_iv_sum: species.phase_highest_iv_sum,
+            shinyTargetCount: 0,
+        };
+    }
+
+    for (const entry of Object.values(routeEncounters)) {
+        if (entry.goal) {
+            const avoidCountingSpecies = Object.values(routeEncounters)
+                .filter(otherEntry => otherEntry.species_name !== entry.species_name && getSpeciesGoal(otherEntry.species_name, checklistConfig) > 0)
+                .map(otherEntry => otherEntry.species_name);
+
+            entry.catches = getSpeciesCatches(entry.species_name, checklistConfig, state.stats, avoidCountingSpecies);
+            entry.shinyTargetCount = Math.min(entry.catches, entry.goal);
+
+            if (entry.catches > entry.goal) {
+                let alternativeExcess = entry.catches - entry.goal;
+                for (const alternative of Object.values(routeEncounters).filter(other => other.species_name !== entry.species_name && getSpeciesGoal(other.species_name, checklistConfig) === entry.goal && other.catches < other.goal)) {
+                    alternativeExcess--;
+                    alternative.shinyTargetCount++;
+                    entry.shinyTargetCount--;
+                }
+            }
+        }
+    }
+
+    renderRouteEncountersList(Object.values(routeEncounters));
+
+    if (cachedAntiShinyCount !== state.stats.current_phase.anti_shiny_encounters) {
+        cachedAntiShinyCount = state.stats.current_phase.anti_shiny_encounters;
+        antiShinyCounter.textContent = "";
+        if (cachedAntiShinyCount > 0) {
+            const sparkles = [];
+            for (let index = 0; index < cachedAntiShinyCount; index++) {
+                const img = document.createElement("img");
+                img.src = "/static/sprites/stream-overlay/anti-shiny.png";
+                img.alt = "";
+                sparkles.push(img);
+            }
+            antiShinyCounter.append(...sparkles);
+        }
+    }
+}
+
+export {updateMapName, animateRouteEncounterSprite, updateRouteEncountersList};

@@ -1,41 +1,38 @@
 # Copyright (c) 2026 realgarit
+import os
 import sqlite3
 import sys
 import threading
 import time
 from collections import deque
-from dataclasses import dataclass
 from datetime import datetime, timezone
-from functools import cached_property
 from textwrap import dedent
 from typing import TYPE_CHECKING, Iterable, Optional
 
-from modules.battle.battle_state import BattleOutcome, EncounterType
+from modules.battle.battle_state import BattleOutcome
 from modules.core.console import console
 from modules.core.context import context
 from modules.items.fishing import FishingAttempt, FishingResult
 from modules.items.items import Item, get_item_by_index
-from modules.pokemon.pokemon import Pokemon, get_species_by_index, Species, get_unown_letter_by_index, get_unown_index_by_letter
+from modules.pokemon.pokemon import Pokemon, get_species_by_index, get_unown_letter_by_index, get_unown_index_by_letter
 
 if TYPE_CHECKING:
     from modules.pokemon.encounter import EncounterInfo
     from modules.core.profiles import Profile
 
 
-current_schema_version = 2
-
-
 from modules.stats.stats_models import (
-    BaseData,
     Encounter,
     EncounterSummary,
-    EncounterTotals,
     GlobalStats,
     PickupItem,
     ShinyPhase,
-    SpeciesRecord,
     StatsDatabaseSchemaTooNew,
 )
+
+current_schema_version = 3
+
+
 
 
 class StatsDatabase:
@@ -69,8 +66,19 @@ class StatsDatabase:
         self._pickup_items: dict[int, PickupItem] = self._get_pickup_items()
         self._base_data: dict[str, str | None] = self._get_base_data()
 
-        self._encounter_timestamps: deque[float] = deque(maxlen=100)
-        self._encounter_frames: deque[int] = deque(maxlen=100)
+        # Normally, the encounter rate is calculated based on the previous 100 encounters. Which
+        # is accurate enough to get a rough idea of how fast things are going, and it means that
+        # a long break in between encounters (due to changing modes, playing manually etc.) will
+        # be flushed out reasonably soon.
+        # But when trying to measure a more accurate encounters/hr for a given route, we need a
+        # larger sample size because the encounter rate can fluctuate quite a bit in some modes.
+        #
+        # So rather than constantly having to edit this file, this allows setting the environment
+        # variable `REALBOT_ENCOUNTER_BENCHMARK` to anything but an empty string in order to
+        # increase the sample size to 1,000.
+        encounter_buffer_size = 1000 if os.getenv("REALBOT_ENCOUNTER_BENCHMARK", "") != "" else 100
+        self._encounter_timestamps: deque[float] = deque(maxlen=encounter_buffer_size)
+        self._encounter_frames: deque[int] = deque(maxlen=encounter_buffer_size)
 
     def set_data(self, key: str, value: str | None):
         self._execute_write("REPLACE INTO base_data (data_key, value) VALUES (?, ?)", (key, value))
@@ -383,6 +391,7 @@ class StatsDatabase:
                 shiny_phases.end_time,
                 shiny_phases.shiny_encounter_id,
                 shiny_phases.encounters,
+                shiny_phases.anti_shiny_encounters,
                 shiny_phases.highest_iv_sum,
                 shiny_phases.highest_iv_sum_species,
                 shiny_phases.lowest_iv_sum,
@@ -428,12 +437,12 @@ class StatsDatabase:
         )
 
         for row in result:
-            if row[26] is not None:
-                encounter = Encounter.from_row_data(row[26:])
+            if row[27] is not None:
+                encounter = Encounter.from_row_data(row[27:])
             else:
                 encounter = None
 
-            yield ShinyPhase.from_row_data(row[:26], encounter)
+            yield ShinyPhase.from_row_data(row[:27], encounter)
 
     def _query_single_shiny_phase(self, where_clause: str, parameters: tuple | None = None) -> ShinyPhase | None:
         result = list(self._query_shiny_phases(where_clause, parameters, limit=1))
@@ -562,6 +571,7 @@ class StatsDatabase:
             """
             UPDATE shiny_phases
             SET encounters = ?,
+                anti_shiny_encounters = ?,
                 highest_iv_sum = ?,
                 highest_iv_sum_species = ?,
                 lowest_iv_sum = ?,
@@ -587,6 +597,7 @@ class StatsDatabase:
             """,
             (
                 shiny_phase.encounters,
+                shiny_phase.anti_shiny_encounters,
                 shiny_phase.highest_iv_sum.value if shiny_phase.highest_iv_sum is not None else None,
                 shiny_phase.highest_iv_sum.species_id_for_database if shiny_phase.highest_iv_sum is not None else None,
                 shiny_phase.lowest_iv_sum.value if shiny_phase.lowest_iv_sum is not None else None,
@@ -904,6 +915,12 @@ class StatsDatabase:
                     """
                 )
             )
+
+        if from_schema_version <= 2:
+            self._execute_write(dedent("""
+                ALTER TABLE shiny_phases
+                    ADD anti_shiny_encounters INT UNSIGNED DEFAULT 0
+                """))
 
         self._execute_write("DELETE FROM schema_version")
         self._execute_write("INSERT INTO schema_version VALUES (?)", (current_schema_version,))

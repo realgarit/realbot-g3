@@ -28,6 +28,7 @@ def get_bot_modes() -> list[Type[BotMode]]:
         from .level_grind import LevelGrindMode
         from .nugget_bridge import NuggetBridgeMode
         from .puzzle_solver import PuzzleSolverMode
+        from .roamer_re_encounter import RoamerReencounterMode
         from .roamer_reset import RoamerResetMode
         from .rock_smash import RockSmashMode
         from .safari import SafariMode
@@ -52,6 +53,7 @@ def get_bot_modes() -> list[Type[BotMode]]:
             LevelGrindMode,
             NuggetBridgeMode,
             PuzzleSolverMode,
+            RoamerReencounterMode,
             RoamerResetMode,
             RockSmashMode,
             SafariMode,

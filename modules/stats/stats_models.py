@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from functools import cached_property
-from typing import TYPE_CHECKING, Optional
+from typing import TYPE_CHECKING
 
 from modules.battle.battle_state import BattleOutcome, EncounterType
 from modules.items.items import Item
@@ -10,7 +10,7 @@ from modules.pokemon.pokemon import Pokemon, Species, get_species_by_index, get_
 from modules.items.fishing import FishingAttempt, FishingResult
 
 if TYPE_CHECKING:
-    from modules.pokemon.encounter import EncounterInfo
+    pass
 
 
 class StatsDatabaseSchemaTooNew(Exception):
@@ -289,6 +289,7 @@ class ShinyPhase:
     end_time: datetime | None = None
     shiny_encounter: Encounter | None = None
     encounters: int = 0
+    anti_shiny_encounters: int = 0
     highest_iv_sum: SpeciesRecord | None = None
     lowest_iv_sum: SpeciesRecord | None = None
     highest_sv: SpeciesRecord | None = None
@@ -314,13 +315,13 @@ class ShinyPhase:
             datetime.fromisoformat(row[2]) if row[2] is not None else None,
             shiny_encounter,
             row[4],
-            SpeciesRecord.from_row_values(row[5], row[6]),
-            SpeciesRecord.from_row_values(row[7], row[8]),
-            SpeciesRecord.from_row_values(row[9], row[10]),
-            SpeciesRecord.from_row_values(row[11], row[12]),
-            SpeciesRecord.from_row_values(row[13], row[14]),
-            SpeciesRecord.from_row_values(row[15], row[16]),
-            row[17],
+            row[5],
+            SpeciesRecord.from_row_values(row[6], row[7]),
+            SpeciesRecord.from_row_values(row[8], row[9]),
+            SpeciesRecord.from_row_values(row[10], row[11]),
+            SpeciesRecord.from_row_values(row[12], row[13]),
+            SpeciesRecord.from_row_values(row[14], row[15]),
+            SpeciesRecord.from_row_values(row[16], row[17]),
             row[18],
             row[19],
             row[20],
@@ -329,6 +330,7 @@ class ShinyPhase:
             row[23],
             row[24],
             row[25],
+            row[26],
         )
 
     @classmethod
@@ -337,6 +339,9 @@ class ShinyPhase:
 
     def update(self, encounter: Encounter):
         self.encounters += 1
+
+        if encounter.pokemon.is_anti_shiny:
+            self.anti_shiny_encounters += 1
 
         if self.highest_iv_sum is None or self.highest_iv_sum < encounter.iv_sum:
             self.highest_iv_sum = SpeciesRecord.create(encounter.iv_sum, encounter.pokemon)
@@ -387,6 +392,7 @@ class ShinyPhase:
                 "start_time": self.start_time.isoformat(),
                 "end_time": self.end_time.isoformat() if self.end_time is not None else None,
                 "encounters": self.encounters,
+                "anti_shiny_encounters": self.anti_shiny_encounters,
                 "highest_iv_sum": self.highest_iv_sum.to_dict() if self.highest_iv_sum is not None else None,
                 "lowest_iv_sum": self.lowest_iv_sum.to_dict() if self.lowest_iv_sum is not None else None,
                 "highest_sv": self.highest_sv.to_dict() if self.highest_sv is not None else None,
@@ -537,6 +543,7 @@ class GlobalStats:
             "current_phase": {
                 "start_time": phase.start_time.isoformat(),
                 "encounters": phase.encounters,
+                "anti_shiny_encounters": phase.anti_shiny_encounters,
                 "highest_iv_sum": phase.highest_iv_sum.to_dict() if phase.highest_iv_sum is not None else None,
                 "lowest_iv_sum": phase.lowest_iv_sum.to_dict() if phase.lowest_iv_sum is not None else None,
                 "highest_sv": phase.highest_sv.to_dict() if phase.highest_sv is not None else None,
