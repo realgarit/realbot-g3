@@ -74,3 +74,20 @@
         color: var(--no-encounters-on-route-font-colour);
     }
 }
+
+#route-encounters {
+    h2 {
+        position: relative;
+    }
+
+    #anti-shiny-counter {
+        position: absolute;
+        right: 1rem;
+        top: .3rem;
+
+        img {
+            transform: scale(1.25);
+            margin-right: .33rem;
+        }
+    }
+}
