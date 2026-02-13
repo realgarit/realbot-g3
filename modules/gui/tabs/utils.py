@@ -7,6 +7,7 @@ from typing import Optional
 
 from PIL import Image, ImageDraw, ImageTk, ImageOps
 
+from modules.core.context import context
 from modules.map.map import (
     get_map_data_for_current_position,
     get_map_all_tiles,
@@ -56,16 +57,15 @@ class FancyTreeview:
             )
 
         self._tv.bind("<Button-3>", self._handle_right_click)
-        self._tv.bind("<Up>", lambda _: root.focus_set())
-        self._tv.bind("<Down>", lambda _: root.focus_set())
-        self._tv.bind("<Left>", lambda _: root.focus_set())
-        self._tv.bind("<Right>", lambda _: root.focus_set())
+        self._tv.bind("<FocusIn>", self._handle_focus_in)
+        self._tv.bind("<FocusOut>", self._handle_focus_out)
 
         if on_highlight is not None:
-            self._tv.bind("<ButtonRelease-1>", lambda _: on_highlight(self._tv.item(self._tv.focus())["text"]))
+            self._tv.bind("<<TreeviewSelect>>", lambda _: on_highlight(self._tv.item(self._tv.focus())["text"]))
 
         if on_double_click is not None:
             self._tv.bind("<Double-Button-1>", lambda _: on_double_click(self._tv.item(self._tv.focus())["text"]))
+            self._tv.bind("<Return>", lambda _: on_double_click(self._tv.item(self._tv.focus())["text"]))
 
     def update_data(self, data: dict) -> None:
         found_items = self._update_dict(data, "", "")
@@ -157,6 +157,14 @@ class FancyTreeview:
             self._tv.selection_set(item)
             self._context_menu.tk_popup(event.x_root, event.y_root)
 
+    def _handle_focus_in(self, _) -> None:
+        if context.gui:
+            context.gui.inputs_enabled = False
+
+    def _handle_focus_out(self, _) -> None:
+        if context.gui:
+            context.gui.inputs_enabled = True
+
     def _handle_copy(self) -> None:
         selection = self._tv.selection()
         if len(selection) < 1:
@@ -164,7 +172,9 @@ class FancyTreeview:
 
         import pyperclip3
 
-        pyperclip3.copy(str(self._tv.item(selection[0])["values"][0]))
+        value = str(self._tv.item(selection[0])["values"][0])
+        pyperclip3.copy(value)
+        context.message = f"Copied to clipboard: {value}"
 
     def _handle_action(self, callback: callable) -> None:
         selection = self._tv.selection()
