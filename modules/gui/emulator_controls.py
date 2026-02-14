@@ -4,6 +4,7 @@ import webbrowser
 from textwrap import dedent
 from tkinter import Menu
 import ttkbootstrap as ttk
+from ttkbootstrap.tooltip import ToolTip
 from typing import Union
 
 from showinfm import show_in_file_manager
@@ -208,6 +209,7 @@ class EmulatorControls:
             group, text=f"{context.bot_mode} ▾", cursor="hand2", command=open_bot_mode_menu
         )
         self.bot_mode_button.grid(row=1, sticky="W", padx=0)
+        ToolTip(self.bot_mode_button, text="Change the current bot mode")
 
     def _add_speed_controls(self, row: int, column: int, sticky: str = "W"):
         def set_emulation_speed(speed: int) -> None:
@@ -255,6 +257,10 @@ class EmulatorControls:
         self.speed_menu_button.grid(row=1, column=1, padx=2)
         self.unthrottled_button.grid(row=1, column=2, padx=2)
 
+        ToolTip(self.speed_1x_button, text="Reset emulation speed to 1×")
+        ToolTip(self.speed_menu_button, text="Select a custom emulation speed")
+        ToolTip(self.unthrottled_button, text="Run at maximum possible speed (Unthrottled)")
+
     def _add_settings_controls(self, row: int, column: int):
         group = ttk.Frame(self.frame)
         group.grid(row=row, column=column, sticky="NE", pady=10)
@@ -266,6 +272,9 @@ class EmulatorControls:
 
         self.toggle_video_button.grid(row=1, column=0, padx=2)
         self.toggle_audio_button.grid(row=1, column=1, padx=2)
+
+        ToolTip(self.toggle_video_button, text="Enable or disable video output")
+        ToolTip(self.toggle_audio_button, text="Enable or disable audio output")
 
     def _get_active_color(self) -> str:
         """Returns a bootstrap color name based on the current game."""
