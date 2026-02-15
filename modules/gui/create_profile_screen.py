@@ -52,6 +52,7 @@ class CreateProfileScreen:
             self.frame, text="Back to Profile Selection", command=self.enable_profile_selection_screen, cursor="hand2"
         )
         button.grid(sticky="NE", row=row)
+        ToolTip(button, text="Return to the profile selection screen")
 
     def _show_welcome_message(self, row: int = 0) -> None:
         welcome_text = (
@@ -201,6 +202,7 @@ class CreateProfileScreen:
             bootstyle="success",
         )
         new_game_button.grid(column=0, row=0, padx=5)
+        ToolTip(new_game_button, text="Create profile and start a new game")
 
         load_save_button = ttk.Button(
             button_container,
@@ -210,6 +212,7 @@ class CreateProfileScreen:
             command=handle_load_save_press,
         )
         load_save_button.grid(column=1, row=0, padx=5)
+        ToolTip(load_save_button, text="Create profile and import an existing save file (.sav or .ss1)")
 
         message_label = ttk.Label(container, text="", wraplength=340, padding=10)
 

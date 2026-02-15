@@ -1,6 +1,7 @@
 # Copyright (c) 2026 realgarit
 from datetime import date, datetime
 import ttkbootstrap as ttk
+from ttkbootstrap.tooltip import ToolTip
 from tkinter import StringVar
 from typing import Union
 
@@ -57,6 +58,7 @@ class SelectProfileScreen:
             cursor="hand2",
         )
         new_profile_button.grid(column=1, row=0, sticky="E")
+        ToolTip(new_profile_button, text="Create a new bot profile")
 
     def _add_profile_list(self, available_profiles: list[Profile], row: int = 2) -> None: # Moved to row 2
         
