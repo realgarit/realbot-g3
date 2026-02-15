@@ -4,6 +4,7 @@ from tkinter import PhotoImage, Canvas
 import time
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+from ttkbootstrap.tooltip import ToolTip
 from typing import Union
 
 import PIL.Image
@@ -215,11 +216,13 @@ class EmulatorScreen:
             self._stepping_button = ttk.Button(
                 self.control_bar, text="⮞", command=next_step, cursor="hand2", bootstyle="danger"
             )
+            ToolTip(self._stepping_button, text="Next frame (Space)")
             self._stepping_button.pack(side=LEFT, padx=5)
 
             self._back_button = ttk.Button(
                 self.control_bar, text="⮜", command=previous_step, cursor="hand2", bootstyle="secondary"
             )
+            ToolTip(self._back_button, text="Previous frame (Ctrl+Space)")
             self._back_button.pack(side=LEFT, padx=0)
             update_back_button()
 

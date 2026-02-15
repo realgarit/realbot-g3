@@ -208,6 +208,7 @@ class EmulatorControls:
         self.bot_mode_button = ttk.Button(
             group, text=f"{context.bot_mode} ▾", cursor="hand2", command=open_bot_mode_menu
         )
+        ToolTip(self.bot_mode_button, text="Select bot operation mode")
         self.bot_mode_button.grid(row=1, sticky="W", padx=0)
         ToolTip(self.bot_mode_button, text="Change the current bot mode")
 
@@ -250,8 +251,11 @@ class EmulatorControls:
         ttk.Label(group, text="Emulation Speed:", justify="left").grid(row=0, column=0, columnspan=4, sticky="W")
 
         self.speed_1x_button = ttk.Button(group, text="1×", cursor="hand2", width=3, command=lambda: set_emulation_speed(1))
+        ToolTip(self.speed_1x_button, text="Set speed to 1x (Normal)")
         self.speed_menu_button = ttk.Button(group, text="…", cursor="hand2", width=3, command=open_speed_menu)
+        ToolTip(self.speed_menu_button, text="More speed options...")
         self.unthrottled_button = ttk.Button(group, text="∞", cursor="hand2", width=3, command=lambda: set_emulation_speed(0))
+        ToolTip(self.unthrottled_button, text="Run as fast as possible")
         
         self.speed_1x_button.grid(row=1, column=0, padx=2)
         self.speed_menu_button.grid(row=1, column=1, padx=2)
@@ -268,7 +272,9 @@ class EmulatorControls:
         ttk.Label(group, text="Other Settings:").grid(row=0, columnspan=2, sticky="W")
 
         self.toggle_video_button = ttk.Button(group, text="Video", cursor="hand2", width=6, command=lambda: context.toggle_video())
+        ToolTip(self.toggle_video_button, text="Toggle video output")
         self.toggle_audio_button = ttk.Button(group, text="Audio", cursor="hand2", width=6, command=lambda: context.toggle_audio())
+        ToolTip(self.toggle_audio_button, text="Toggle audio output")
 
         self.toggle_video_button.grid(row=1, column=0, padx=2)
         self.toggle_audio_button.grid(row=1, column=1, padx=2)

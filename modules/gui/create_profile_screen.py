@@ -72,6 +72,7 @@ class CreateProfileScreen:
         flipped_birch_image = ImageTk.PhotoImage(flipped_birch_sprite)
 
         icon = ttk.Label(container, image=flipped_birch_image, padding=10)
+        ToolTip(icon, text="Click to flip Birch!")
         icon.grid(sticky="N", row=0, column=0)
         icon.img1 = birch_image
         icon.img2 = flipped_birch_image
